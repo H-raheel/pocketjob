@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/constants/constants.dart';
-import 'package:pocketjob/screens/success.dart';
+import 'package:pocketjob/screens/home_screen.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
-class Apply extends StatelessWidget {
+class EditProfile extends StatelessWidget {
+  const EditProfile({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,17 +49,16 @@ class Apply extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  AttachPDFField(
-                      label: "Upload CV/Resume", hintText: "Browse file"),
+                  Field(context, "Currently Employed", ""),
                   SizedBox(
                     height: 20,
                   ),
                   Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
-                      child: primaryButton("Submit", () {
+                      child: primaryButton("Done", () {
                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Success()));
+                            MaterialPageRoute(builder: (context) => HomeScreen()));
                       })),
                 ]),
           ),

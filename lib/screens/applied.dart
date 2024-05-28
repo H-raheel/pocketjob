@@ -40,7 +40,7 @@ class AppliedJobs extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => TestScreen(
+                                        builder: (context) => JobInfoScreen(
                                             jobDetails: jobs[index])));
                               },
                               child: (JobListingCard(

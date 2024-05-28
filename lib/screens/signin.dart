@@ -31,7 +31,7 @@ class SignIn extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     Row(
@@ -47,16 +47,16 @@ class SignIn extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.06,
                     ),
                     Field(context, "Email", "example@gmail.com"),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Field(context, "Password", ""),
-                    SizedBox(height: 22),
+                    const SizedBox(height: 22),
                     Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.07,
                         child: primaryButton("Sign In", () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => BottomNav()));
@@ -70,7 +70,7 @@ class SignIn extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => SignUp()));

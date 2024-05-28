@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/screens/job_info.dart';
-import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/widgets/job_listing_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,13 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
               itemCount: jobs.length,
               itemBuilder: (context, index) {
+                print(jobs);
                 return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  TestScreen(jobDetails: jobs[index])));
+                                  JobInfoScreen(jobDetails: jobs[index])));
                     },
                     child: (JobListingCard(
                       job: jobs[index],
@@ -64,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                 "Welcome, Humera!!",
                 style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w600),
               ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560241990086",
+    "project_id": "poketjob-4e066",
+    "storage_bucket": "poketjob-4e066.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560241990086:android:349d17c95a2f129306fac7",
+        "android_client_info": {
+          "package_name": "com.example.pocketjob"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCECHBFnPnClHM9A42VLNDOKRwRmgVH87E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,16 +5,23 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.white,
-      child: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back,
+    return Transform.scale(
+      scale: 0.8,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.grey)),
+        child: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            size: 24,
+          ),
+          color: Colors.black,
         ),
-        color: Colors.black,
       ),
     );
   }

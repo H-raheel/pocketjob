@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 Card c_Card(BuildContext context, IconData icon, String heading, String sub) {
@@ -19,11 +20,11 @@ Card c_Card(BuildContext context, IconData icon, String heading, String sub) {
           Flexible(
             flex: 1,
             child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               child: Icon(
                 icon,
                 color: mainColor,
               ),
-              backgroundColor: Color(0xFFF6F6F6),
             ),
           ),
           SizedBox(width: 6),
@@ -40,6 +41,7 @@ Card c_Card(BuildContext context, IconData icon, String heading, String sub) {
                 Text(
                   sub,
                   style: blue_subheading(),
+                  overflow: TextOverflow.ellipsis,
                 )
               ],
             ),

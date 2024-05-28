@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketjob/screens/applied.dart';
 import 'package:pocketjob/screens/home_screen.dart';
 import 'package:pocketjob/screens/saved_jobs.dart';
-import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/utils/colors.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -13,16 +13,16 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int currentIndex = 0;
-  final screens = [HomeScreen(), SavedJobs(), AppliedJobs()];
+  final screens = [const HomeScreen(), SavedJobs(), AppliedJobs()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             border: Border.all(color: const Color.fromARGB(255, 212, 212, 212)),
             color: Colors.white,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.1,
@@ -38,14 +38,15 @@ class _BottomNavState extends State<BottomNav> {
           type: BottomNavigationBarType.fixed,
           selectedItemColor: mainColor,
           //currentIndex: 1,
-          iconSize: 30,
-          items: [
+          // iconSize: 30,
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Saved"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.business_center_rounded),
-                label: "Application"),
+              icon: Icon(Icons.business_center_rounded),
+              label: "Application",
+            ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_2_rounded), label: "Profile")
           ],
