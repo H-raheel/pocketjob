@@ -29,12 +29,16 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: mainColor,
       body: Center(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/logo.png'),
-          Text(
-            "Pocket Job",
-            style: heading(),
-          )
+          SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              width: MediaQuery.of(context).size.height * 0.8,
+              child: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.contain,
+              )),
+          Text("PocketJob", style: splashText())
         ],
       )),
     );

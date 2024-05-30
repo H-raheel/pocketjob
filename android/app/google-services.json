@@ -12,7 +12,20 @@
           "package_name": "com.example.pocketjob"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "560241990086-1p048d87nko38n9p143s5hne6mt7s26m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pocketjob",
+            "certificate_hash": "bd5b400c12b844fe7b953003e47f0dd3483d7fc9"
+          }
+        },
+        {
+          "client_id": "560241990086-pusbctimr03insrekon95fp5o6brfvdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCECHBFnPnClHM9A42VLNDOKRwRmgVH87E"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560241990086-pusbctimr03insrekon95fp5o6brfvdi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "560241990086-5aib2m5d0b1fdqjtbs5lie7fa1r0smv3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pocketjob"
+              }
+            }
+          ]
         }
       }
     }

@@ -1,36 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/updateJobsProvider.dart';
-import 'package:pocketjob/utils/texts.dart';
-
-class JobListingCard extends ConsumerWidget {
-  final JobListing job;
-  final bool showLocation;
-  final bool applied;
-  const JobListingCard(
-      {super.key,
-      required this.job,
-      required this.showLocation,
-      required this.applied});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final savedJobListIds = ref.watch(bookmarkedJobsProvider);
-
-    return Card(
-      elevation: 2,
-      child: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: showLocation
-            ? MediaQuery.of(context).size.height * 0.3
-            : MediaQuery.of(context).size.height * 0.28,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
+ Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -160,7 +128,87 @@ class JobListingCard extends ConsumerWidget {
                 : Container(),
           ],
         ),
-      ),
-    );
+
+
+
+
+        import 'dart:core';
+
+import 'package:pocketjob/providers/userRepoprovider.dart';
+import 'package:pocketjob/repo/authentication.dart';
+import 'package:pocketjob/repo/userRepo.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'updateJobsProvider.g.dart';
+
+@riverpod
+//make this future
+class BookmarkedJobs extends _$BookmarkedJobs {
+  List<String> list = [];
+  @override
+  Future<List<String>> build() async {
+    // await getFromFirebase();
+    return await getFromFirebase();
+  }
+
+  // Future getFromFirebase() async {
+  //   final userRepository = ref.read(userRepositoryProvider);
+  //   state = const AsyncLoading();
+
+  //   state = AsyncValue.data(
+  //       await userRepository.getSavedJobs(AuthService().getUserId()!));
+  //   final List<String> savedJobs =
+  //       await userRepository.getSavedJobs(AuthService().getUserId()!);
+  //   state = AsyncValue.data(savedJobs);
+  //   // Future<List<String>> jobs =
+  //   //     userRepo().getSavedJobs(AuthService().getUserId()!);
+  //   list = savedJobs;
+  //   print("ll" + list.toString());
+  //   // state = jobscon;
+  // }
+
+  Future getFromFirebase() async {
+    final userRepository = ref.read(userRepositoryProvider);
+    state = const AsyncLoading();
+
+    try {
+      final savedJobs =
+          await userRepository.getSavedJobs(AuthService().getUserId()!);
+      list = savedJobs;
+      print("ll" + list.toString());
+      state = AsyncValue.data(savedJobs);
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
+  }
+  // Future<void> getFromFirebase() async {
+  //   final userRepository = ref.read(userRepositoryProvider);
+  //   state = const AsyncValue.loading();
+
+  //   try {
+  //     final userId = AuthService().getUserId()!;
+  //     final List<String> savedJobs = await userRepository.getSavedJobs(userId);
+  //     state = AsyncValue.data(savedJobs);
+  //   } catch (e, stack) {
+  //     state = AsyncValue.error(e, stack);
+  //   }
+  // }
+
+  void _add(String jobId) {
+    list = [...list, jobId];
+  }
+
+  void _remove(String jobId) {
+    list = list.where((id) => id != jobId).toList();
+  }
+
+  void updateJobList(String jobId) async {
+    if (list.contains(jobId)) {
+      _remove(jobId);
+    } else {
+      _add(jobId);
+    }
+    await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
+    //state=await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
   }
 }

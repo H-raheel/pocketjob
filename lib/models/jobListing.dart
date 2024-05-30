@@ -1,7 +1,8 @@
 class JobListing {
+  final String? id;
   final String title;
   final String company;
-  final double? salary;
+  final int? salary;
   final String? city;
   final String country;
   final List<String> type;
@@ -11,6 +12,7 @@ class JobListing {
   final String companyInfo;
 
   JobListing({
+    this.id,
     required this.title,
     required this.company,
     this.salary,
@@ -26,6 +28,7 @@ class JobListing {
   // Method to convert a JobListing to JSON
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'company': company,
       'salary': salary,
@@ -42,6 +45,7 @@ class JobListing {
   // Method to create a JobListing from JSON
   factory JobListing.fromJson(Map<String, dynamic> json) {
     return JobListing(
+      id: json['id'],
       title: json['title'],
       company: json['company'],
       salary: json['salary'],

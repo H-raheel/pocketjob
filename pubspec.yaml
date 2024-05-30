@@ -43,8 +43,16 @@ dependencies:
   file_picker: ^8.0.3
   dotted_border: ^2.1.0
   firebase_core: ^2.31.0
-  firebase_auth: ^4.19.5
+  firebase_auth: ^4.20.0
   cloud_firestore: ^4.17.3
+  dropdownfield2: ^1.0.7
+  google_sign_in: ^6.2.1
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.4.0
+  firebase_storage: ^11.7.7
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +80,8 @@ flutter:
   assets:
   - assets/images/logo.png
   - assets/images/pdf_logo.png
+  - assets/images/google.jpg
+  - assets/images/error.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

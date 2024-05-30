@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/screens/applied.dart';
 import 'package:pocketjob/screens/home_screen.dart';
+import 'package:pocketjob/screens/profile.dart';
 import 'package:pocketjob/screens/saved_jobs.dart';
 import 'package:pocketjob/utils/colors.dart';
 
@@ -13,12 +14,12 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int currentIndex = 0;
-  final screens = [const HomeScreen(), SavedJobs(), AppliedJobs()];
+  final screens = [HomeScreen(), SavedJobs(), AppliedJobs(), ProfileScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
             border: Border.all(color: const Color.fromARGB(255, 212, 212, 212)),
             color: Colors.white,
@@ -37,6 +38,8 @@ class _BottomNavState extends State<BottomNav> {
           elevation: 0,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: mainColor,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           //currentIndex: 1,
           // iconSize: 30,
           items: const [

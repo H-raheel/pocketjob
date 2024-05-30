@@ -185,8 +185,12 @@ class JobInfoScreen extends StatelessWidget {
                     // height: 2,
                     // width: 2,
                     child: primaryButton("Apply for Job", () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Apply()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Apply(
+                                    jobId: jobDetails.id!,
+                                  )));
                     }),
                   ),
                 )),

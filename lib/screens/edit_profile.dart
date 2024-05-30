@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pocketjob/constants/constants.dart';
+
 import 'package:pocketjob/screens/home_screen.dart';
+import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/buttons.dart';
@@ -32,24 +33,24 @@ class EditProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Field(context, "Full Name", ""),
+               //   Field(label: "Full Name", hintText: ""),
                   SizedBox(
                     height: 20,
                   ),
-                  Field(context, "Email", ""),
+                //  Field(label: "Email", hintText: ""),
                   SizedBox(
                     height: 20,
                   ),
                   SizedBox(height: 22),
-                  Field(context, "Phone Number", ""),
+              //    Field(label: "Phone Number", hintText: ""),
                   SizedBox(
                     height: 20,
                   ),
-                  Field(context, "Currently Employed", ""),
+                //  Field(label: "Currently Employed", hintText: ""),
                   SizedBox(
                     height: 20,
                   ),
-                  Field(context, "Currently Employed", ""),
+              //    Field(label: "Currently Employed?", hintText: ""),
                   SizedBox(
                     height: 20,
                   ),
@@ -57,8 +58,10 @@ class EditProfile extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
                       child: primaryButton("Done", () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
                       })),
                 ]),
           ),
