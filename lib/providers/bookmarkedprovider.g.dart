@@ -6,7 +6,7 @@ part of 'bookmarkedprovider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookmarkedHash() => r'3d48f496e6ad7e45dfc6df9baf67b7746e4817eb';
+String _$bookmarkedHash() => r'4ebe30d9ba504f00ed785cce4acf1ad4f4172ce0';
 
 /// See also [bookmarked].
 @ProviderFor(bookmarked)

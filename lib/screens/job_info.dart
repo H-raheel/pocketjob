@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
+import 'package:pocketjob/providers/controllers/applyButtonController.dart';
 import 'package:pocketjob/screens/apply.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/tile.dart';
 import 'package:readmore/readmore.dart';
 
 import '../widgets/buttons.dart';
 
-class JobInfoScreen extends StatelessWidget {
+class JobInfoScreen extends ConsumerWidget {
   final JobListing jobDetails;
-  final List<JobListing> jobs = jobsList;
+  // final List<JobListing> jobs = jobsList;
   JobInfoScreen({
     super.key,
     required this.jobDetails,
   });
 
-  // TabController tabController=new TabController(length: 2, vsync: this);
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool applied =
+        ref.read(jobApplicationsProvider.notifier).isIdPresent(jobDetails.id!);
+
     return Scaffold(
         appBar: AppBar(
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           leading: Back(),
-          // centerTitle: true,
-          // title: Text(
-          //   "Applied",
-          //   style: heading(),
-          // ),
         ),
         body: SafeArea(
             child: Stack(
@@ -43,24 +42,6 @@ class JobInfoScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   // borderRadius: BorderRadius.circular(20),
                   color: Theme.of(context).colorScheme.secondary),
-              // decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.only(
-              //         bottomLeft: Radius.circular(10),
-              //         bottomRight: Radius.circular(10))),
-              // child: Column(
-              //   // mainAxisAlignment: MainAxisAlignment.start,
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     //  Back(),
-              //     AppBar(
-              //       scrolledUnderElevation: 0,
-              //       elevation: 0,
-              //       backgroundColor: Theme.of(context).colorScheme.secondary,
-              //       leading: Back(),
-              //       centerTitle: true,
-              //     ),
-              //   ],
-              // )
             ),
             Positioned(
                 bottom: 0,
@@ -169,8 +150,8 @@ class JobInfoScreen extends StatelessWidget {
                   ),
                 )),
             Positioned(
-                bottom: 0,
-                child: Container(
+              bottom: 0,
+              child: Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -181,19 +162,35 @@ class JobInfoScreen extends StatelessWidget {
                           topRight: Radius.circular(20))),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.1,
+                  //        child: Consumer(builder: (context, ref, child) {
+
                   child: Container(
-                    // height: 2,
-                    // width: 2,
-                    child: primaryButton("Apply for Job", () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Apply(
-                                    jobId: jobDetails.id!,
-                                  )));
+                    child: primaryButton("Apply for Job", () async {
+                      // final storage = await SharedPreferences.getInstance();
+                      // List<String> list =
+                      //     storage.getStringList("appliedJobs") ?? [];
+                      //  print("gotlist");
+                      //  print(list.toString());
+                      !applied
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Apply(
+                                        jobId: jobDetails.id!,
+                                      )))
+                          : showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const Alert(
+                                    message:
+                                        'You have already applied for this job. Please wait patiently for the response.');
+                              },
+                            );
                     }),
+                  )
+                  //         }
                   ),
-                )),
+            ),
             Positioned(
               bottom: MediaQuery.of(context).size.height * 0.75,
               right: 0,
@@ -209,3 +206,5 @@ class JobInfoScreen extends StatelessWidget {
         )));
   }
 }
+
+

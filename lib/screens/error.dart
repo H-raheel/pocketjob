@@ -32,7 +32,7 @@ class ErrorScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Unexpected Error Occured.Please Try Again Later",
+                  "Unexpected Error Occurred.Please Try Again Later",
                   style: subheading2(),
                 ),
                 SizedBox(

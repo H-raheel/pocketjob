@@ -17,7 +17,7 @@ class Back extends StatelessWidget {
           onPressed: () async {
             bool condition = await Navigator.of(context).maybePop();
             if (condition == true) {
-              Navigator.pop(context);
+              Navigator.of(context, rootNavigator: true).pop(context);
             } else {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => BottomNav()));

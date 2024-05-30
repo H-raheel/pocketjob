@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/providers/controllers/applyButtonController.dart';
+import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/repo/authentication.dart';
 import 'package:pocketjob/screens/signup.dart';
 import 'package:pocketjob/utils/colors.dart';
@@ -7,20 +11,34 @@ import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SignIn extends StatefulWidget {
-  final AuthRepo auth = AuthRepo();
+class SignIn extends ConsumerWidget {
   SignIn({super.key});
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
-  State<SignIn> createState() => _SignInState();
-}
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
-class _SignInState extends State<SignIn> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  Future<void> sharedPreference(WidgetRef ref) async {
+    final storage = await SharedPreferences.getInstance();
+    storage.setBool("isLogin", true);
+    List<String> appliedJobs = await ref
+        .read(userRepositoryProvider)
+        .getAppliedJobs(ref.read(authProvider).getUserId()!);
+    storage.setStringList("appliedJobs", appliedJobs);
+    List<String> savedJobs = await ref
+        .read(userRepositoryProvider)
+        .getSavedJobs(ref.read(authProvider).getUserId()!);
+    storage.setStringList("savedJobs", savedJobs);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.tertiary,
       body: SafeArea(
@@ -48,7 +66,7 @@ class _SignInState extends State<SignIn> {
                       height: 12,
                     ),
                     Field(
-                      controller: emailController,
+                      controller: _emailController,
                       label: "Email",
                       hintText: "example@gmail.com",
                       validator: (value) => validateEmail(value),
@@ -57,7 +75,7 @@ class _SignInState extends State<SignIn> {
                       height: 20,
                     ),
                     PasswordField(
-                      controller: passwordController,
+                      controller: _passwordController,
                       label: "Password",
                       hintText: "",
                       validator: (value) => validateNonEmptyField(value),
@@ -84,11 +102,15 @@ class _SignInState extends State<SignIn> {
                                 fit: BoxFit.cover,
                               )),
                           onTap: () async {
-                            await widget.auth.signInwithGoogle();
+                            await AuthRepo().signInwithGoogle();
+                            ref
+                                .read(jobApplicationsProvider.notifier)
+                                .getjobs();
+                            // await sharedPreference(ref);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => BottomNav()));
+                                    builder: (context) => const BottomNav()));
                           },
                         ),
                       ],

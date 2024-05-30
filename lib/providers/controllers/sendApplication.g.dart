@@ -6,7 +6,7 @@ part of 'sendApplication.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$applyForJobHash() => r'2b503d4e383ff5392d819df6907123c2d6fcbf48';
+String _$applyForJobHash() => r'd8ae0c39292eaf17211e37de74949b7fa849a3e1';
 
 /// See also [ApplyForJob].
 @ProviderFor(ApplyForJob)

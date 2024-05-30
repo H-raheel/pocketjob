@@ -10,9 +10,16 @@ class waitingForProgressLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: SpinKitWanderingCubes(
-      color: mainColor,
-      size: 50.0,
-    ));
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("please wait..."),
+          SpinKitWanderingCubes(
+            color: mainColor,
+            size: 50.0,
+          ),
+        ],
+      ),
+    );
   }
 }

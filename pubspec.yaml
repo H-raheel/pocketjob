@@ -53,6 +53,7 @@ dependencies:
   riverpod_generator: ^2.4.0
   firebase_storage: ^11.7.7
   flutter_spinkit: ^5.2.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:

@@ -16,7 +16,7 @@ class JobListingCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savedJobListIds = ref.watch(bookmarkedJobsProvider);
+  //  final savedJobListIds = ref.watch(bookmarkedJobsProvider);
 
     return Card(
       elevation: 2,

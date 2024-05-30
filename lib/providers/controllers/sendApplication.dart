@@ -2,7 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketjob/models/applications.dart';
 import 'package:pocketjob/providers/applicationRepoprovider.dart';
-import 'package:pocketjob/repo/authentication.dart';
+import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/providers/controllers/applyButtonController.dart';
+import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,9 +25,10 @@ class ApplyForJob extends _$ApplyForJob {
     try {
       print("inheree");
       state = const AsyncValue.loading();
-      final userId = await AuthRepo().getUserId();
+      final user = ref.read(authProvider).getUser();
+
       final applicationWithUserId = ApplicationModel(
-        userId: userId!,
+        userId: user!.uid,
         name: application.name,
         email: application.email,
         phone: application.phone,
@@ -37,13 +40,17 @@ class ApplyForJob extends _$ApplyForJob {
         pdfUrl: application.pdfUrl,
       );
       final applicationRepository = ref.read(applicationRepositoryProvider);
+      final userRepository = ref.read(userRepositoryProvider);
 
       await applicationRepository.saveApplication(applicationWithUserId, file);
+      await userRepository.saveAppliedJobToUser(user.uid, application.jobId);
+      ref.read(jobApplicationsProvider.notifier).getjobs();
     } catch (e) {
       state = AsyncValue.error(Error, StackTrace.current);
     } finally {
       state = const AsyncValue.data(null);
       if (state.hasError == false) {
+        ;
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Success()));
       }

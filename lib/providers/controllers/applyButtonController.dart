@@ -1,0 +1,68 @@
+// import 'package:pocketjob/providers/authProvider.dart';
+// import 'package:pocketjob/providers/userRepoprovider.dart';
+// import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+// part 'applyButtonController.g.dart';
+
+// @riverpod
+// class JobApplications extends _$JobApplications {
+//   @override
+//   List<String> build() {
+//     return [];
+//   }
+
+//   void getjobs() async {
+//     final userRepository = ref.read(userRepositoryProvider);
+//     final authRepo = ref.read(authProvider);
+//     List<String> jobs =
+//         await userRepository.getAppliedJobs(authRepo.getUserId()!);
+//     state = jobs;
+
+//     ref.notifyListeners();
+//     print("staaate");
+//     print(state.toString());
+//   }
+
+//   bool isIdPresent(String id) {
+//     print("id" + id);
+//     print("infunction" + state.toString());
+//     if (state.contains(id)) {
+//       return true;
+//     }
+//     return false;
+//   }
+// }
+
+// final applications = jobApplicationsProvider;
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/providers/userRepoprovider.dart';
+
+final jobApplicationsProvider =
+    StateNotifierProvider<JobApplications, List<String>>((ref) {
+  return JobApplications(ref);
+});
+
+class JobApplications extends StateNotifier<List<String>> {
+  final Ref ref;
+
+  JobApplications(this.ref) : super([]);
+
+  Future<void> getjobs() async {
+    final userRepository = ref.read(userRepositoryProvider);
+    final authRepo = ref.read(authProvider);
+    final userId = authRepo.getUserId();
+
+    if (userId != null) {
+      List<String> jobs = await userRepository.getAppliedJobs(userId);
+      state = jobs;
+      print("state updated: $state");
+    }
+  }
+
+  bool isIdPresent(String id) {
+    print("Checking ID $id in state: $state");
+    return state.contains(id);
+  }
+}

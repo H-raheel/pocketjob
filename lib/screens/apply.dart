@@ -158,8 +158,7 @@ class _ApplyState extends State<Apply> {
                                           label: "Position",
                                           hintText: "",
                                           validator: (value) {
-                                            error =
-                                                validateNonEmptyField(value);
+                                            return validateNonEmptyField(value);
                                           }
 
                                           // validateNonEmpty(value)
@@ -197,8 +196,6 @@ class _ApplyState extends State<Apply> {
                                   if (_formKey.currentState!.validate()) {
                                     print("validatedd");
 
-                                    // final userId =
-                                    //     await AuthRepo().getUserId();
                                     final application = ApplicationModel(
                                       userId: "vGJ9LenHvggttunadLiYTXTwnxv2",
                                       name: nameController.text,

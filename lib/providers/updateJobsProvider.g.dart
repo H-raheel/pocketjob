@@ -6,7 +6,7 @@ part of 'updateJobsProvider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookmarkedJobsHash() => r'fb45180b3569126985e6bff24d61e149eec47b7a';
+String _$bookmarkedJobsHash() => r'998a83f17b6b525495620c3e30afa0791e13995c';
 
 /// See also [BookmarkedJobs].
 @ProviderFor(BookmarkedJobs)
