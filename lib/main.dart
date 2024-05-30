@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/firebase_options.dart';
+import 'package:pocketjob/screens/splash_screen.dart';
 import 'package:pocketjob/utils/colors.dart';
-import 'package:pocketjob/widgets/bottom_navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
               onPrimaryContainer: const Color.fromARGB(255, 212, 212, 212)),
           useMaterial3: true,
         ),
-        //  home: Apply());
+        home: SplashScreen());
 
-        home: BottomNav());
+    // home: BottomNav());
   }
 }

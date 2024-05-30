@@ -4,8 +4,9 @@ import 'package:pocketjob/repo/userRepo.dart';
 
 import '../models/users.dart';
 
-class AuthService {
+class AuthRepo {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   userRepo dbService = userRepo();
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
   final GoogleSignIn _googleSignIn = GoogleSignIn();

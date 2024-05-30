@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:pocketjob/providers/repoProviders/userRepoprovider.dart';
+import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/repo/authentication.dart';
 import 'package:pocketjob/repo/userRepo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,14 +21,13 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     state = const AsyncLoading();
 
     state = AsyncValue.data(
-        await userRepository.getSavedJobs(AuthService().getUserId()!));
+        await userRepository.getSavedJobs(AuthRepo().getUserId()!));
     //print("jobsssssssss");
     Future<List<String>> jobs =
-        userRepo().getSavedJobs(AuthService().getUserId()!);
+        userRepo().getSavedJobs(AuthRepo().getUserId()!);
     list = await jobs;
 
     print("jobsssssssss");
-    
   }
 
   void _add(String jobId) {
@@ -45,7 +44,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     } else {
       _add(jobId);
     }
-    await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
-    //state=await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
+    await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
+    //state=await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
   }
 }

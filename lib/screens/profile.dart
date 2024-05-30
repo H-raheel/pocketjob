@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
         child: ElevatedButton(
       onPressed: () async {
         // Navigate back to the first screen by popping the current route
-        await AuthService().signOut();
+        await AuthRepo().signOut();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SignUp()));
       },

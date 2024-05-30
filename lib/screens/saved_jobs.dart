@@ -6,7 +6,7 @@ import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/job_listing_card.dart';
 
-import '../providers/streams/bookmarkedprovider.dart';
+import '../providers/bookmarkedprovider.dart';
 
 class SavedJobs extends ConsumerWidget {
   final List<JobListing> jobs = jobsList;
@@ -36,8 +36,25 @@ class SavedJobs extends ConsumerWidget {
                   padding: EdgeInsets.only(top: 6, right: 6, left: 6),
                   child: switch (dataNotifier) {
                     AsyncData(:final value) => value.isEmpty
-                        ? Container(
-                            child: Text("CREATE A WIDGET TO DISPLAY NO DATA"))
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "No Jobs Saved",
+                                  style: heading(),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Icon(
+                                  Icons.bookmark_border,
+                                  size: 50,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          )
                         : ListView.separated(
                             itemCount: value.length,
                             itemBuilder: (context, index) {
@@ -71,7 +88,7 @@ class SavedJobs extends ConsumerWidget {
 
                   // StreamBuilder<List<JobListing>>(
                   //     stream: userRepo()
-                  //         .getSavedJobsStream(AuthService().getUserId()!),
+                  //         .getSavedJobsStream(AuthRepo().getUserId()!),
                   //     builder: (context, snapshot) {
                   //       if (snapshot.hasData) {
                   //         List<JobListing> jobs = snapshot.data!;

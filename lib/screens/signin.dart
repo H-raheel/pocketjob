@@ -9,7 +9,7 @@ import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
 class SignIn extends StatefulWidget {
-  final AuthService auth = AuthService();
+  final AuthRepo auth = AuthRepo();
   SignIn({super.key});
 
   @override
@@ -56,7 +56,7 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Field(
+                    PasswordField(
                       controller: passwordController,
                       label: "Password",
                       hintText: "",

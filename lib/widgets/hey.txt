@@ -156,12 +156,12 @@ class BookmarkedJobs extends _$BookmarkedJobs {
   //   state = const AsyncLoading();
 
   //   state = AsyncValue.data(
-  //       await userRepository.getSavedJobs(AuthService().getUserId()!));
+  //       await userRepository.getSavedJobs(AuthRepo().getUserId()!));
   //   final List<String> savedJobs =
-  //       await userRepository.getSavedJobs(AuthService().getUserId()!);
+  //       await userRepository.getSavedJobs(AuthRepo().getUserId()!);
   //   state = AsyncValue.data(savedJobs);
   //   // Future<List<String>> jobs =
-  //   //     userRepo().getSavedJobs(AuthService().getUserId()!);
+  //   //     userRepo().getSavedJobs(AuthRepo().getUserId()!);
   //   list = savedJobs;
   //   print("ll" + list.toString());
   //   // state = jobscon;
@@ -173,7 +173,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
 
     try {
       final savedJobs =
-          await userRepository.getSavedJobs(AuthService().getUserId()!);
+          await userRepository.getSavedJobs(AuthRepo().getUserId()!);
       list = savedJobs;
       print("ll" + list.toString());
       state = AsyncValue.data(savedJobs);
@@ -186,7 +186,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
   //   state = const AsyncValue.loading();
 
   //   try {
-  //     final userId = AuthService().getUserId()!;
+  //     final userId = AuthRepo().getUserId()!;
   //     final List<String> savedJobs = await userRepository.getSavedJobs(userId);
   //     state = AsyncValue.data(savedJobs);
   //   } catch (e, stack) {
@@ -208,7 +208,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     } else {
       _add(jobId);
     }
-    await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
-    //state=await userRepo().saveJobToUser(AuthService().getUserId()!, jobId);
+    await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
+    //state=await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
   }
 }

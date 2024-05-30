@@ -198,7 +198,7 @@ class _ApplyState extends State<Apply> {
                                     print("validatedd");
 
                                     // final userId =
-                                    //     await AuthService().getUserId();
+                                    //     await AuthRepo().getUserId();
                                     final application = ApplicationModel(
                                       userId: "vGJ9LenHvggttunadLiYTXTwnxv2",
                                       name: nameController.text,

@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketjob/models/applications.dart';
-import 'package:pocketjob/providers/repoProviders/applicationRepoprovider.dart';
+import 'package:pocketjob/providers/applicationRepoprovider.dart';
 import 'package:pocketjob/repo/authentication.dart';
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -23,7 +23,7 @@ class ApplyForJob extends _$ApplyForJob {
     try {
       print("inheree");
       state = const AsyncValue.loading();
-      final userId = await AuthService().getUserId();
+      final userId = await AuthRepo().getUserId();
       final applicationWithUserId = ApplicationModel(
         userId: userId!,
         name: application.name,

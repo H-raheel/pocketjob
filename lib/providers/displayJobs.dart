@@ -1,5 +1,5 @@
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/repoProviders/jobsRepoProvider.dart';
+import 'package:pocketjob/providers/jobsRepoProvider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'displayJobs.g.dart';

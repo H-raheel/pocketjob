@@ -9,7 +9,7 @@ import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
 class SignUp extends StatefulWidget {
-  final AuthService auth = AuthService();
+  final AuthRepo auth = AuthRepo();
   SignUp({super.key});
 
   @override
@@ -75,13 +75,13 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: 10,
                       ),
-                      Field(
+                      PasswordField(
                           controller: passwordController,
                           label: "Password",
                           hintText: "",
                           validator: (value) => validateNonEmptyField(value)),
                       SizedBox(height: 10),
-                      Field(
+                      PasswordField(
                           controller: confirmPasswordController,
                           label: "Confirm Password",
                           hintText: "",
