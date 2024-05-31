@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/screens/signup.dart';
-import 'package:pocketjob/utils/colors.dart';
+import 'package:pocketjob/services/authentication.dart';
 import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
-
-import '../repo/authentication.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
             onPressed: () async {
-              await AuthRepo().signOut();
+              await AuthServ().signOut();
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => SignUp()),
@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.grey),
                     borderRadius: BorderRadius.circular(20)),
-                leading: Icon(Icons.person_2_rounded),
+                leading: Icon(Icons.pie_chart_outline_outlined),
                 tileColor: Theme.of(context).colorScheme.tertiary,
                 trailing: Icon(Icons.arrow_forward_ios),
                 title: Text(
@@ -59,16 +59,43 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              ListTile(
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(20)),
-                leading: Icon(Icons.help),
-                tileColor: Theme.of(context).colorScheme.tertiary,
-                trailing: Icon(Icons.arrow_forward_ios),
-                title: Text(
-                  "Need any help?",
-                  style: blue_subheading(),
+              GestureDetector(
+                onTap: () async {
+                  final Uri emailUri =
+                      Uri(scheme: 'mailto', path: 'h.raheel622@gmail.com');
+                  if (await canLaunchUrl(emailUri)) {
+                    try {
+                      await launchUrl(emailUri);
+                    } catch (e) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const Alert(
+                              message: 'Some unexpected error occurred.');
+                        },
+                      );
+                    }
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const Alert(
+                            message: 'Some unexpected error occurred.');
+                      },
+                    );
+                  }
+                },
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(20)),
+                  leading: Icon(Icons.mail),
+                  tileColor: Theme.of(context).colorScheme.tertiary,
+                  trailing: Icon(Icons.arrow_forward_ios),
+                  title: Text(
+                    "Contact Help Center",
+                    style: blue_subheading(),
+                  ),
                 ),
               ),
               SizedBox(
@@ -82,10 +109,10 @@ class ProfileScreen extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward_ios),
                 tileColor: Theme.of(context).colorScheme.tertiary,
                 title: Text(
-                  "Visit our website",
+                  "Privacy Policy",
                   style: blue_subheading(),
                 ),
-              )
+              ),
             ],
           ),
         ),

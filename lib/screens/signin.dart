@@ -4,7 +4,6 @@ import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/providers/savedhandle2.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
-import 'package:pocketjob/repo/authentication.dart';
 import 'package:pocketjob/screens/signup.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
@@ -13,6 +12,8 @@ import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../services/authentication.dart';
 
 class SignIn extends ConsumerWidget {
   SignIn({super.key});
@@ -29,11 +30,11 @@ class SignIn extends ConsumerWidget {
     final storage = await SharedPreferences.getInstance();
     storage.setBool("isLogin", true);
     List<String> appliedJobs = await ref
-        .read(userRepositoryProvider)
+        .read(userserviceProvider)
         .getAppliedJobs(ref.read(authProvider).getUserId()!);
     storage.setStringList("appliedJobs", appliedJobs);
     List<String> savedJobs = await ref
-        .read(userRepositoryProvider)
+        .read(userserviceProvider)
         .getSavedJobs(ref.read(authProvider).getUserId()!);
     storage.setStringList("savedJobs", savedJobs);
   }
@@ -103,7 +104,7 @@ class SignIn extends ConsumerWidget {
                                 fit: BoxFit.cover,
                               )),
                           onTap: () async {
-                            await AuthRepo().signInwithGoogle();
+                            await AuthServ().signInwithGoogle();
                             await ref
                                 .read(jobApplicationsProvider.notifier)
                                 .getjobs();

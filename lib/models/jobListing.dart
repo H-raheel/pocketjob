@@ -86,7 +86,7 @@ List<JobListing> jobsList = [
       Pursuing or recently completed a degree in Finance, Economics, or a related field with a keen interest in investment analysis and private equity.
       Previous experience or internship in investment analysis or a related field is highly advantageous.
       Exceptional proficiency in English, both written and spoken, with an emphasis on clarity and professionalism in communication.
-      Demonstrated ability to swiftly and accurately create and manage business documents and reports.
+      Demonstrated ability to swiftly and accurately create and manage business documents and servrts.
       A proactive approach to learning, with the capacity to manage a variety of tasks effectively in a remote work environment.
     ''',
   ),
@@ -110,7 +110,7 @@ List<JobListing> jobsList = [
       Stay up-to-date with industry trends and market competition.
     ''',
     qualification: '''
-      Marketing and related majors. good communication skills, sales skills, teamwork spirit, customer relationship management capabilities, and the ability to complete sales targets and prepare sales reports, etc.
+      Marketing and related majors. good communication skills, sales skills, teamwork spirit, customer relationship management capabilities, and the ability to complete sales targets and prepare sales servrts, etc.
       Those who can speak Chinese will be given priority.
     ''',
     companyInfo: '''
@@ -179,7 +179,7 @@ List<JobListing> jobsList = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0D0QPy_qt2A6szvz1VNWVMbo56tGv_iDNjBVCtGqyxw&s',
     description: '''
       Conduct thorough research on various topics as per project requirements.
-      Analyze data and compile findings into comprehensive reports.
+      Analyze data and compile findings into comprehensive servrts.
       Stay updated with the latest trends and developments in the research field.
       Present findings in a clear and concise manner to team members and stakeholders.
       Assist in the development of research methodologies and tools.
@@ -394,7 +394,7 @@ List<JobListing> jobsList = [
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfEFJxirt2-ojNs138EJb0ZNDhrbe8Qj4Rd_R9o1Hbog&s',
     description: '''
       Assist in collecting, analyzing, and interpreting data sets.
-      Create visualizations and reports to communicate insights.
+      Create visualizations and servrts to communicate insights.
       Clean and preprocess data to ensure accuracy and consistency.
       Collaborate with senior analysts to perform ad hoc analysis and research.
       Gain exposure to data analysis tools and techniques.

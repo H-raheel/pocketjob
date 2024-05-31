@@ -1,8 +1,10 @@
 import 'dart:core';
 
 import 'package:pocketjob/providers/userRepoprovider.dart';
-import 'package:pocketjob/repo/authentication.dart';
-import 'package:pocketjob/repo/userRepo.dart';
+
+import 'package:pocketjob/services/authentication.dart';
+import 'package:pocketjob/services/userRepo.dart';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'updateJobsProvider.g.dart';
@@ -17,14 +19,14 @@ class BookmarkedJobs extends _$BookmarkedJobs {
   }
 
   Future getFromFirebase() async {
-    final userRepository = ref.read(userRepositoryProvider);
+    final userservice = ref.read(userserviceProvider);
     state = const AsyncLoading();
 
     state = AsyncValue.data(
-        await userRepository.getSavedJobs(AuthRepo().getUserId()!));
+        await userservice.getSavedJobs(AuthServ().getUserId()!));
     //print("jobsssssssss");
     Future<List<String>> jobs =
-        userRepo().getSavedJobs(AuthRepo().getUserId()!);
+        userServ().getSavedJobs(AuthServ().getUserId()!);
     list = await jobs;
 
     print("jobsssssssss");
@@ -44,7 +46,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     } else {
       _add(jobId);
     }
-    await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
-    //state=await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
+    await userServ().saveJobToUser(AuthServ().getUserId()!, jobId);
+    //state=await userServ().saveJobToUser(AuthServ().getUserId()!, jobId);
   }
 }

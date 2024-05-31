@@ -1,12 +1,15 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketjob/models/applications.dart';
-import 'package:pocketjob/providers/applicationRepoprovider.dart';
+
 import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
+
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../applicationRepoprovider.dart';
 
 part 'sendApplication.g.dart';
 
@@ -39,11 +42,11 @@ class ApplyForJob extends _$ApplyForJob {
         status: application.status,
         pdfUrl: application.pdfUrl,
       );
-      final applicationRepository = ref.read(applicationRepositoryProvider);
-      final userRepository = ref.read(userRepositoryProvider);
+      final applicationservice = ref.read(applicationserviceProvider);
+      final userservice = ref.read(userserviceProvider);
 
-      await applicationRepository.saveApplication(applicationWithUserId, file);
-      await userRepository.saveAppliedJobToUser(user.uid, application.jobId);
+      await applicationservice.saveApplication(applicationWithUserId, file);
+      await userservice.saveAppliedJobToUser(user.uid, application.jobId);
       ref.read(jobApplicationsProvider.notifier).getjobs();
     } catch (e) {
       state = AsyncValue.error(Error, StackTrace.current);

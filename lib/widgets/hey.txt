@@ -134,9 +134,9 @@
 
         import 'dart:core';
 
-import 'package:pocketjob/providers/userRepoprovider.dart';
-import 'package:pocketjob/repo/authentication.dart';
-import 'package:pocketjob/repo/userRepo.dart';
+import 'package:pocketjob/providers/userServprovider.dart';
+import 'package:pocketjob/serv/authentication.dart';
+import 'package:pocketjob/serv/userServ.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'updateJobsProvider.g.dart';
@@ -152,28 +152,28 @@ class BookmarkedJobs extends _$BookmarkedJobs {
   }
 
   // Future getFromFirebase() async {
-  //   final userRepository = ref.read(userRepositoryProvider);
+  //   final userservice = ref.read(userserviceProvider);
   //   state = const AsyncLoading();
 
   //   state = AsyncValue.data(
-  //       await userRepository.getSavedJobs(AuthRepo().getUserId()!));
+  //       await userservice.getSavedJobs(AuthServ().getUserId()!));
   //   final List<String> savedJobs =
-  //       await userRepository.getSavedJobs(AuthRepo().getUserId()!);
+  //       await userservice.getSavedJobs(AuthServ().getUserId()!);
   //   state = AsyncValue.data(savedJobs);
   //   // Future<List<String>> jobs =
-  //   //     userRepo().getSavedJobs(AuthRepo().getUserId()!);
+  //   //     userServ().getSavedJobs(AuthServ().getUserId()!);
   //   list = savedJobs;
   //   print("ll" + list.toString());
   //   // state = jobscon;
   // }
 
   Future getFromFirebase() async {
-    final userRepository = ref.read(userRepositoryProvider);
+    final userservice = ref.read(userserviceProvider);
     state = const AsyncLoading();
 
     try {
       final savedJobs =
-          await userRepository.getSavedJobs(AuthRepo().getUserId()!);
+          await userservice.getSavedJobs(AuthServ().getUserId()!);
       list = savedJobs;
       print("ll" + list.toString());
       state = AsyncValue.data(savedJobs);
@@ -182,12 +182,12 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     }
   }
   // Future<void> getFromFirebase() async {
-  //   final userRepository = ref.read(userRepositoryProvider);
+  //   final userservice = ref.read(userserviceProvider);
   //   state = const AsyncValue.loading();
 
   //   try {
-  //     final userId = AuthRepo().getUserId()!;
-  //     final List<String> savedJobs = await userRepository.getSavedJobs(userId);
+  //     final userId = AuthServ().getUserId()!;
+  //     final List<String> savedJobs = await userservice.getSavedJobs(userId);
   //     state = AsyncValue.data(savedJobs);
   //   } catch (e, stack) {
   //     state = AsyncValue.error(e, stack);
@@ -208,7 +208,7 @@ class BookmarkedJobs extends _$BookmarkedJobs {
     } else {
       _add(jobId);
     }
-    await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
-    //state=await userRepo().saveJobToUser(AuthRepo().getUserId()!, jobId);
+    await userServ().saveJobToUser(AuthServ().getUserId()!, jobId);
+    //state=await userServ().saveJobToUser(AuthServ().getUserId()!, jobId);
   }
 }

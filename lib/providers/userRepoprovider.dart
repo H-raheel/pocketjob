@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/repo/userRepo.dart';
+import 'package:pocketjob/services/userRepo.dart';
 
-final userRepositoryProvider = Provider<userRepo>((ref) {
-  return userRepo();
+
+final userserviceProvider = Provider<userServ>((ref) {
+  return userServ();
 });

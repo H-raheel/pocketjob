@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pocketjob/repo/userRepo.dart';
+import 'package:pocketjob/services/userRepo.dart';
+
 
 import '../models/users.dart';
 
-class AuthRepo {
+class AuthServ {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  userRepo dbService = userRepo();
+  userServ dbService = userServ();
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 

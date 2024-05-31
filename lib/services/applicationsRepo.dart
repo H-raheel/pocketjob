@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:pocketjob/models/applications.dart';
 
-class ApplicationsRepo {
+class ApplicationsServ {
   UploadTask? upload;
   final CollectionReference applications =
       FirebaseFirestore.instance.collection('Applications');

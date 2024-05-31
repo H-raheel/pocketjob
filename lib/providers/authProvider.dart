@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/repo/authentication.dart';
+import 'package:pocketjob/services/authentication.dart';
 
-final authProvider = Provider<AuthRepo>((ref) {
-  return AuthRepo();
+final authProvider = Provider<AuthServ>((ref) {
+  return AuthServ();
 });

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pocketjob/repo/authentication.dart';
+
 import 'package:pocketjob/screens/signin.dart';
+import 'package:pocketjob/services/authentication.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
@@ -9,7 +10,7 @@ import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
 class SignUp extends StatefulWidget {
-  final AuthRepo auth = AuthRepo();
+  final AuthServ auth = AuthServ();
   SignUp({super.key});
 
   @override
