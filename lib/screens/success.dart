@@ -79,7 +79,7 @@ class Success extends StatelessWidget {
                   //  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      backgroundColor: mainColor,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       radius: MediaQuery.of(context).size.width * 0.2,
                       child: Icon(
                         Icons.check_rounded,

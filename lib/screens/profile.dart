@@ -23,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.logout,
-              color: mainColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
             onPressed: () async {
               await AuthRepo().signOut();

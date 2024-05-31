@@ -41,7 +41,8 @@ class Field extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
               focusColor: Theme.of(context).colorScheme.primary,
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: mainColor, width: 2),
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary, width: 2),
                   borderRadius: BorderRadius.circular(10)),
               contentPadding: EdgeInsets.all(16),
               hintText: hintText,
@@ -105,7 +106,8 @@ class _PasswordFieldState extends State<PasswordField> {
                   borderRadius: BorderRadius.circular(10)),
               focusColor: Theme.of(context).colorScheme.primary,
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: mainColor, width: 2),
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary, width: 2),
                   borderRadius: BorderRadius.circular(10)),
               contentPadding: EdgeInsets.all(16),
               hintText: widget.hintText,
@@ -172,7 +174,7 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
           height: 12,
         ),
         DottedBorder(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.primary,
           radius: Radius.circular(10),
           borderType: BorderType.Rect,
           strokeWidth: 4,
@@ -213,10 +215,10 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
                                   }
                                 }
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.upload_file_rounded,
                                 size: 40,
-                                color: mainColor,
+                                color: Theme.of(context).colorScheme.primary,
                               )),
                           Text(
                             "Choose File",

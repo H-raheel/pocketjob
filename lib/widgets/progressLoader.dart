@@ -15,7 +15,7 @@ class waitingForProgressLoader extends StatelessWidget {
         children: [
           Text("please wait..."),
           SpinKitWanderingCubes(
-            color: mainColor,
+            color: Theme.of(context).colorScheme.primary,
             size: 50.0,
           ),
         ],

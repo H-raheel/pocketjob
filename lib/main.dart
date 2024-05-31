@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/firebase_options.dart';
 import 'package:pocketjob/screens/splash_screen.dart';
-import 'package:pocketjob/utils/colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
 
           colorScheme: ColorScheme.fromSeed(
               seedColor: Color.fromARGB(255, 248, 248, 255),
-              primary: mainColor,
+              primary: Color.fromARGB(255, 29, 26, 215),
               secondary: Color(0xFFF6F6F6),
               tertiary: Color(0xFFFDFDFD),
               onPrimaryContainer: const Color.fromARGB(255, 212, 212, 212)),

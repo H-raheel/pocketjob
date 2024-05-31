@@ -37,7 +37,7 @@ class _BottomNavState extends State<BottomNav> {
           backgroundColor: Colors.white,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: mainColor,
+          selectedItemColor: Theme.of(context).colorScheme.primary,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           //currentIndex: 1,

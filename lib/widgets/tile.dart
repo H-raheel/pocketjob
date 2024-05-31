@@ -23,7 +23,7 @@ Card c_Card(BuildContext context, IconData icon, String heading, String sub) {
               backgroundColor: Theme.of(context).colorScheme.secondary,
               child: Icon(
                 icon,
-                color: mainColor,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),

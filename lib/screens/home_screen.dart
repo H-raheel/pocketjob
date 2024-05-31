@@ -123,7 +123,7 @@ class HomeScreen extends ConsumerWidget {
                     filled: true,
                     prefixIcon: Icon(
                       Icons.search,
-                      color: mainColor,
+                      color: Theme.of(context).colorScheme.primary,
                       size: 30,
                     ),
                     fillColor: Colors.white,

@@ -91,7 +91,7 @@ class JobListingCard extends ConsumerWidget {
                       Icons.bookmark_add_rounded,
                       size: 28,
                       color: savedJobs.contains(job.id)
-                          ? mainColor
+                          ? Theme.of(context).colorScheme.primary
                           : Color.fromARGB(57, 28, 28, 29),
 
                       // ref

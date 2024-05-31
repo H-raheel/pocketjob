@@ -81,7 +81,7 @@ class JobInfoScreen extends ConsumerWidget {
                               Icon(
                                 Icons.pin_drop,
                                 size: 30,
-                                color: mainColor,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                               Text(
                                 jobDetails.city! + " , " + jobDetails.country,
@@ -140,7 +140,8 @@ class JobInfoScreen extends ConsumerWidget {
                                 jobDetails.description,
                                 trimLength: 200,
                                 style: body(),
-                                colorClickableText: mainColor,
+                                colorClickableText:
+                                    Theme.of(context).colorScheme.primary,
                                 trimCollapsedText: 'more',
                                 trimExpandedText: 'show less',
                               ),

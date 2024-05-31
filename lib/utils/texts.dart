@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pocketjob/utils/colors.dart';
 
 TextStyle heading() =>
     const TextStyle(fontWeight: FontWeight.bold, fontSize: 22);
@@ -24,7 +23,9 @@ TextStyle subheading2() {
 
 TextStyle blue_subheading() {
   return const TextStyle(
-      fontWeight: FontWeight.bold, color: mainColor, fontSize: 15);
+      fontWeight: FontWeight.bold,
+      color: Color.fromARGB(255, 29, 26, 215),
+      fontSize: 15);
 }
 
 TextStyle body() {
@@ -55,7 +56,9 @@ TextStyle body3() {
 
 TextStyle salaryDisplayFont() {
   return const TextStyle(
-      fontWeight: FontWeight.bold, color: mainColor, fontSize: 18);
+      fontWeight: FontWeight.bold,
+      color: Color.fromARGB(255, 29, 26, 215),
+      fontSize: 18);
 }
 
 TextStyle splashText() {

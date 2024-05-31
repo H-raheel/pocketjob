@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
@@ -19,7 +18,7 @@ class Alert extends StatelessWidget {
       ),
       title: Icon(
         Icons.error,
-        color: mainColor,
+        color: Theme.of(context).colorScheme.primary,
       ),
       content: Text(
         message,
