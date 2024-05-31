@@ -6,7 +6,7 @@ part of 'displayJobs.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$displayHash() => r'1726c6d8097a3588d96a31b5923b7e1298c68204';
+String _$displayHash() => r'aaa40f4e96dc56670e2c74a4090b6d957e1f89f6';
 
 /// See also [display].
 @ProviderFor(display)

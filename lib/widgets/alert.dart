@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 
-class Alert extends StatelessWidget {
+class Warning extends StatelessWidget {
   final String message;
-  const Alert({
+  const Warning({
     required this.message,
     super.key,
   });

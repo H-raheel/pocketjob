@@ -29,7 +29,7 @@ class Field extends StatelessWidget {
           label,
           style: heading2(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 12,
         ),
         TextFormField(
@@ -44,7 +44,7 @@ class Field extends StatelessWidget {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.primary, width: 2),
                   borderRadius: BorderRadius.circular(10)),
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: EdgeInsets.all(10),
               hintText: hintText,
               hintStyle: subheading2(),
               fillColor: fieldColor,
@@ -109,19 +109,18 @@ class _PasswordFieldState extends State<PasswordField> {
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.primary, width: 2),
                   borderRadius: BorderRadius.circular(10)),
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(10),
               hintText: widget.hintText,
               hintStyle: subheading2(),
               fillColor: fieldColor,
               filled: true,
               suffixIcon: IconButton(
                 icon: Icon(
-                  // Based on passwordVisible state choose the icon
                   _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: Theme.of(context).primaryColorDark,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 15,
                 ),
                 onPressed: () {
-                  // Update the state i.e. toogle the state of passwordVisible variable
                   setState(() {
                     _passwordVisible = !_passwordVisible;
                   });

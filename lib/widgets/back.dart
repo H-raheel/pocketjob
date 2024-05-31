@@ -23,7 +23,7 @@ class Back extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => BottomNav()));
             }
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             size: 24,
           ),

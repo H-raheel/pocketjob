@@ -83,4 +83,6 @@ class JobApplications extends StateNotifier<List<String>> {
     }
     //list = state;
   }
+
+  
 }

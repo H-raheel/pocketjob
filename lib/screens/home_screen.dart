@@ -4,8 +4,9 @@ import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/displayJobs.dart';
 import 'package:pocketjob/providers/searchProvider.dart';
 import 'package:pocketjob/screens/job_info.dart';
-import 'package:pocketjob/utils/colors.dart';
+import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/job_listing_card.dart';
+import 'package:pocketjob/widgets/progressLoader.dart';
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
@@ -19,14 +20,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dataNotifier = ref.watch(displayProvider);
     final searchControllerProvider = ref.watch(searchProvider);
-    // final savedJobs = ref.watch(jobsSavedProvider.notifier).list;
-    // print("savedjobss" + ref.read(jobsSavedProvider.notifier).state.toString());
-    //final savedJobs = ref.watch(jobsSavedProvider);
-    //   print(savedJobs.toString() + "saved jobs");
-    // print("prrirnrnr");
-    // final app = ref.watch(jobApplicationsProvider.notifier).state;
-    // print(app.toString() + "app");
-    //  print(ref.read(jobsSavedProvider.notifier).state.toString() + "saved jobs");
+
     return Scaffold(
         body: SafeArea(
             child: Stack(
@@ -41,11 +35,12 @@ class HomeScreen extends ConsumerWidget {
                 left: 16),
             child: switch (dataNotifier) {
               AsyncData(:final value) => value == []
-                  ? Center(child: Text("no data"))
+                  ? Center(
+                      child: Text(
+                      "No Jobs Available",
+                      style: subheading(),
+                    ))
                   : ListView.builder(
-                      // separatorBuilder: (context, index) => const SizedBox(
-                      //     //  height: 10,
-                      //     ),
                       itemCount: value.length,
                       itemBuilder: (context, index) {
                         List<JobListing> jobs = value;
@@ -85,12 +80,12 @@ class HomeScreen extends ConsumerWidget {
                                 //  ref: ref,
                               )));
                         } else {
-                          return const SizedBox();
+                          return null;
                         }
                       }),
               AsyncError(:final error) =>
                 Center(child: Text(error.toString() + "error.try again ")),
-              AsyncLoading() => Center(child: CircularProgressIndicator()),
+              AsyncLoading() => (const WaitingForProgressLoader()),
               _ => Center(child: Text("default")),
             }),
         Container(

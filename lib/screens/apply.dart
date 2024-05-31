@@ -54,8 +54,8 @@ class _ApplyState extends State<Apply> {
       );
       final AsyncValue<void> state = ref.watch(applyForJobProvider);
 
-      print("heeeeeraeeaeeeeloaading");
-      print(state.isLoading);
+     // print("heeeeeraeeaeeeeloaading");
+    //  print(state.isLoading);
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
@@ -72,7 +72,7 @@ class _ApplyState extends State<Apply> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: state.isLoading
-                ? waitingForProgressLoader()
+                ? const WaitingForProgressLoader()
                 : Form(
                     key: _formKey,
                     child: Padding(
@@ -210,19 +210,14 @@ class _ApplyState extends State<Apply> {
                                           : null,
                                       jobId: widget.jobId,
                                     );
-                                    print("status checckckckk");
-                                    print(state.isLoading);
+
                                     print(
                                         ref.read(applyForJobProvider.notifier));
 
-                                    if (state.isLoading == true) {
-                                      print("YOUVE DONE TAHATAT ONCEE DUMBASS");
-                                    } else {
-                                      ref
-                                          .read(applyForJobProvider.notifier)
-                                          .sendApplication(application,
-                                              pickedFile!, context);
-                                    }
+                                    ref
+                                        .read(applyForJobProvider.notifier)
+                                        .sendApplication(
+                                            application, pickedFile!, context);
 
                                     // Navigator.pushReplacement(
                                     //     context,

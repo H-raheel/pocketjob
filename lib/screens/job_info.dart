@@ -169,11 +169,7 @@ class JobInfoScreen extends ConsumerWidget {
 
                   child: Container(
                     child: primaryButton("Apply for Job", () async {
-                      // final storage = await SharedPreferences.getInstance();
-                      // List<String> list =
-                      //     storage.getStringList("appliedJobs") ?? [];
-                      //  print("gotlist");
-                      //  print(list.toString());
+                      
                       !applied
                           ? Navigator.push(
                               context,
@@ -184,7 +180,7 @@ class JobInfoScreen extends ConsumerWidget {
                           : showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return const Alert(
+                                return const Warning(
                                     message:
                                         'You have already applied for this job. Please wait patiently for the response.');
                               },

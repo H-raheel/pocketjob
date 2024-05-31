@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'updateJobsProvider.dart';
+part of 'signInController.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookmarkedJobsHash() => r'158713062e1bfced70336221bbba239d0c1c5683';
+String _$authControllerHash() => r'5447c12ed2781ceca06346383a51ac9b2470ced6';
 
-/// See also [BookmarkedJobs].
-@ProviderFor(BookmarkedJobs)
-final bookmarkedJobsProvider =
-    AutoDisposeAsyncNotifierProvider<BookmarkedJobs, List<String>>.internal(
-  BookmarkedJobs.new,
-  name: r'bookmarkedJobsProvider',
+/// See also [AuthController].
+@ProviderFor(AuthController)
+final authControllerProvider =
+    AutoDisposeAsyncNotifierProvider<AuthController, void>.internal(
+  AuthController.new,
+  name: r'authControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$bookmarkedJobsHash,
+      : _$authControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$BookmarkedJobs = AutoDisposeAsyncNotifier<List<String>>;
+typedef _$AuthController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

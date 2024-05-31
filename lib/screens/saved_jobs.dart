@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/displayJobs.dart';
-import 'package:pocketjob/providers/savedhandle2.dart';
+import 'package:pocketjob/providers/handleSavedJobs.dart';
 import 'package:pocketjob/screens/job_info.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';

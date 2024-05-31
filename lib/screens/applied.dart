@@ -89,7 +89,7 @@ class AppliedJobs extends ConsumerWidget {
                               itemCount: data.length,
                             )),
                       error: (error, StackTrace) => Text(error.toString()),
-                      loading: () => waitingForProgressLoader())),
+                      loading: () => const WaitingForProgressLoader())),
             )
           ],
         ),

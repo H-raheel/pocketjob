@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/utils/texts.dart';
-import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 
 class ErrorScreen extends StatelessWidget {
@@ -32,7 +31,7 @@ class ErrorScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Unexpected Error Occurred.Please Try Again Later",
+                  "Unexpected Error Occurred\nPlease Try Again Later",
                   style: subheading2(),
                 ),
                 SizedBox(
@@ -41,9 +40,8 @@ class ErrorScreen extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.07,
-                    child: primaryButton("Go Back to Home", () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => BottomNav()));
+                    child: primaryButton("Go Back", () {
+                      Navigator.of(context).pop(context);
                     })),
               ]),
         ),

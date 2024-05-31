@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/savedhandle2.dart';
+import 'package:pocketjob/providers/handleSavedJobs.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 

@@ -20,7 +20,7 @@ String? validatePhoneNumber(String? value) {
     return 'Phone number is required';
   }
   if (!pakistanPhoneNumberRegExp.hasMatch(value)) {
-    return 'Please enter a valid  phone number in the following format +92XXXXXXXXXX';
+    return 'Please follow the format: +92XXXXXXXXXX';
   }
   return null;
 }
@@ -36,7 +36,6 @@ String? validatePasswordsMatch(String? value, String confirm) {
 }
 
 String? validateNonEmpty(File? value) {
-
   print(value);
   if (value == null) {
     return 'This field cannot be empty';
@@ -45,7 +44,7 @@ String? validateNonEmpty(File? value) {
 }
 
 String? validateNonEmptyField(String? value) {
-  if (value == null) {
+  if (value == null || value.isEmpty) {
     return 'This field cannot be empty';
   }
   return null;
@@ -57,7 +56,7 @@ String? validateEmail(String? value) {
   }
 
   if (!emailRegExp.hasMatch(value)) {
-    return 'Please enter a valid email address in the format example@example.com';
+    return 'Please follow the format: example@example.com';
   }
   return null;
 }

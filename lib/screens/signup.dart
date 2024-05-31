@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pocketjob/providers/controllers/signInController.dart';
 import 'package:pocketjob/screens/signin.dart';
 import 'package:pocketjob/services/authentication.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
-import 'package:pocketjob/widgets/bottom_navigation.dart';
+import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
@@ -23,6 +25,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +38,8 @@ class _SignUpState extends State<SignUp> {
               child: Form(
                 key: _formKey,
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    //  crossAxisAlignment: CrossAxisAlignment.start,
+                    //  mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Image.asset('assets/images/logo.png')),
                       Text(
                         "Create Account",
                         style: heading3(),
@@ -55,9 +53,9 @@ class _SignUpState extends State<SignUp> {
                         textAlign: TextAlign.center,
                         style: body(),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.06,
-                      ),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.06,
+                      // ),
                       Field(
                         controller: nameController,
                         label: "Name",
@@ -88,24 +86,51 @@ class _SignUpState extends State<SignUp> {
                           hintText: "",
                           validator: (value) => validatePasswordsMatch(
                               value, passwordController.text)),
-                      SizedBox(height: 10),
+                     const SizedBox(height: 10),
                       Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           height: MediaQuery.of(context).size.height * 0.07,
-                          child: primaryButton("Sign Up", () async {
-                            if (_formKey.currentState!.validate()) {
-                              print("validatedd");
-                              await widget.auth.signUp(emailController.text,
-                                  passwordController.text, nameController.text);
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => BottomNav()));
-                            }
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => BottomNav()));
+                          child: Consumer(builder: (context, ref, child) {
+                            final AsyncValue<void> state =
+                                ref.watch(authControllerProvider);
+                            ref.listen<AsyncValue<void>>(
+                              authControllerProvider,
+                              (_, state) => state.whenOrNull(
+                                error: (error, stackTrace) {
+                                  print("SHHHHOOWNG" +
+                                      error
+                                          .toString()
+                                          .replaceAll("Exception: ", ""));
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => Warning(
+                                          message: error
+                                              .toString()
+                                              .replaceAll("Exception: ", "")));
+                                },
+                              ),
+                            );
+                            return state.isLoading
+                                ? SpinKitThreeBounce(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    size: 10)
+                                : primaryButton("Sign Up", () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      ref
+                                          .read(authControllerProvider.notifier)
+                                          .signUpWithIdPassword(
+                                              context,
+                                              emailController.text,
+                                              passwordController.text,
+                                              nameController.text);
+                                      // Navigator.pushReplacement(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             BottomNav()));
+                                    }
+                                  });
                           })),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

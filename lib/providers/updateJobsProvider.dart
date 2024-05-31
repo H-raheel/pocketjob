@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:pocketjob/providers/userRepoprovider.dart';
 
 import 'package:pocketjob/services/authentication.dart';
-import 'package:pocketjob/services/userRepo.dart';
+import 'package:pocketjob/services/userServices.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

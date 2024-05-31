@@ -64,31 +64,31 @@ class userServ {
     }
   }
 
-  Stream<List<JobListing>> getSavedJobsStream(String userId) async* {
-    final userRef = users.doc(userId);
-    final userDoc = await userRef.get();
-    if (!userDoc.exists) {
-      yield [];
-      return;
-    }
+  // Stream<List<JobListing>> getSavedJobsStream(String userId) async* {
+  //   final userRef = users.doc(userId);
+  //   final userDoc = await userRef.get();
+  //   if (!userDoc.exists) {
+  //     yield [];
+  //     return;
+  //   }
 
-    final userData = userDoc.data() as Map<String, dynamic>;
-    final savedJobsIds = List<String>.from(userData['savedJobs'] ?? []);
+  //   final userData = userDoc.data() as Map<String, dynamic>;
+  //   final savedJobsIds = List<String>.from(userData['savedJobs'] ?? []);
 
-    if (savedJobsIds.isEmpty) {
-      yield [];
-    } else {
-      yield* jobs
-          .where(FieldPath.documentId, whereIn: savedJobsIds)
-          .snapshots()
-          .map((querySnapshot) {
-        return querySnapshot.docs.map((doc) {
-          final jobData = doc.data() as Map<String, dynamic>;
-          return JobListing.fromJson({...jobData, 'id': doc.id});
-        }).toList();
-      });
-    }
-  }
+  //   if (savedJobsIds.isEmpty) {
+  //     yield [];
+  //   } else {
+  //     yield* jobs
+  //         .where(FieldPath.documentId, whereIn: savedJobsIds)
+  //         .snapshots()
+  //         .map((querySnapshot) {
+  //       return querySnapshot.docs.map((doc) {
+  //         final jobData = doc.data() as Map<String, dynamic>;
+  //         return JobListing.fromJson({...jobData, 'id': doc.id});
+  //       }).toList();
+  //     });
+  //   }
+  // }
 
   Future<List<String>> getSavedJobs(String userId) async {
     try {

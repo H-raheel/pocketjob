@@ -39,7 +39,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
 
-
 final handleSavedJobsProvider =
     StateNotifierProvider<handleSavedJobs, List<String>>((ref) {
   return handleSavedJobs(ref);
@@ -84,7 +83,7 @@ class handleSavedJobs extends StateNotifier<List<String>> {
     //list = state;
   }
 
-  void updateSavedJobsList(String jobId) async {
+  void updateSavedJobsList() async {
     final userservice = ref.read(userserviceProvider);
     final authServ = ref.read(authProvider);
     final userId = authServ.getUserId();
