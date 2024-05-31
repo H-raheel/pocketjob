@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/providers/authProvider.dart';
-import 'package:pocketjob/providers/controllers/applyButtonController.dart';
+import 'package:pocketjob/providers/handleAppliedJobs.dart';
+import 'package:pocketjob/providers/savedhandle2.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/repo/authentication.dart';
 import 'package:pocketjob/screens/signup.dart';
@@ -103,8 +104,11 @@ class SignIn extends ConsumerWidget {
                               )),
                           onTap: () async {
                             await AuthRepo().signInwithGoogle();
-                            ref
+                            await ref
                                 .read(jobApplicationsProvider.notifier)
+                                .getjobs();
+                            await ref
+                                .read(handleSavedJobsProvider.notifier)
                                 .getjobs();
                             // await sharedPreference(ref);
                             Navigator.pushReplacement(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/controllers/applyButtonController.dart';
+import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/screens/apply.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
@@ -22,6 +22,8 @@ class JobInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //final app = ref.watch(jobApplicationsProvider.notifier).state;
+    // print(app.toString() + "app");
     bool applied =
         ref.read(jobApplicationsProvider.notifier).isIdPresent(jobDetails.id!);
 
@@ -206,5 +208,3 @@ class JobInfoScreen extends ConsumerWidget {
         )));
   }
 }
-
-

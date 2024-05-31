@@ -9,7 +9,7 @@ import 'package:pocketjob/widgets/job_listing_card.dart';
 
 class HomeScreen extends ConsumerWidget {
   HomeScreen({super.key});
-  TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   void update(WidgetRef ref, String value) {
     ref.read(searchProvider.notifier).state = value;
@@ -19,7 +19,14 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dataNotifier = ref.watch(displayProvider);
     final searchControllerProvider = ref.watch(searchProvider);
-
+    // final savedJobs = ref.watch(jobsSavedProvider.notifier).list;
+    // print("savedjobss" + ref.read(jobsSavedProvider.notifier).state.toString());
+    //final savedJobs = ref.watch(jobsSavedProvider);
+    //   print(savedJobs.toString() + "saved jobs");
+    // print("prrirnrnr");
+    // final app = ref.watch(jobApplicationsProvider.notifier).state;
+    // print(app.toString() + "app");
+    //  print(ref.read(jobsSavedProvider.notifier).state.toString() + "saved jobs");
     return Scaffold(
         body: SafeArea(
             child: Stack(
@@ -56,6 +63,7 @@ class HomeScreen extends ConsumerWidget {
                                 job: current,
                                 showLocation: true,
                                 applied: false,
+                                // ref: ref,
                               )));
                         } else if (current.title
                             .toLowerCase()
@@ -74,6 +82,7 @@ class HomeScreen extends ConsumerWidget {
                                 job: current,
                                 showLocation: true,
                                 applied: false,
+                                //  ref: ref,
                               )));
                         } else {
                           return const SizedBox();

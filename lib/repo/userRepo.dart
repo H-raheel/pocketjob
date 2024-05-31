@@ -185,4 +185,32 @@ class userRepo {
       throw Exception('Failed to update applied jobs: $e');
     }
   }
+
+  Future<void> sendSavedJobsToUser(String userId, List<String> jobIds) async {
+    final userRef = users.doc(userId);
+
+    try {
+      final userDoc = await userRef.get();
+      if (!userDoc.exists) {
+        throw Exception('User not found');
+      }
+
+      final userData = userDoc.data() as Map<String, dynamic>;
+      final savedJobs = List<String>.from(userData['savedJobs'] ?? []);
+
+      // Add new job IDs to the list of saved jobs
+      for (final jobId in jobIds) {
+        if (!savedJobs.contains(jobId)) {
+          savedJobs.add(jobId);
+        }
+      }
+
+      // Update the user document with the updated list of saved jobs
+      await userRef.update({
+        'savedJobs': savedJobs,
+      });
+    } catch (e) {
+      throw Exception('Failed to update saved jobs: $e');
+    }
+  }
 }

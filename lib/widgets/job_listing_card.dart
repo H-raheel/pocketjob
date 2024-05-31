@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/updateJobsProvider.dart';
+import 'package:pocketjob/providers/savedhandle2.dart';
+import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class JobListingCard extends ConsumerWidget {
   final JobListing job;
   final bool showLocation;
   final bool applied;
-  const JobListingCard(
-      {super.key,
-      required this.job,
-      required this.showLocation,
-      required this.applied});
+  // final WidgetRef ref;
+  const JobListingCard({
+    super.key,
+    required this.job,
+    required this.showLocation,
+    required this.applied,
+    //   required this.ref
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-  //  final savedJobListIds = ref.watch(bookmarkedJobsProvider);
-
+  Widget build(BuildContext context, ref) {
+    //  final savedJobListIds = ref.watch(bookmarkedJobsProvider);
+    final savedJobs = ref.watch(handleSavedJobsProvider);
+    print(savedJobs.toString() + "saved jobs in card");
     return Card(
       elevation: 2,
       child: Container(
@@ -78,22 +83,23 @@ class JobListingCard extends ConsumerWidget {
                 const Spacer(),
                 IconButton(
                     onPressed: () async {
-                      List<String> list =
-                          ref.read(bookmarkedJobsProvider.notifier).list;
                       ref
-                          .read(bookmarkedJobsProvider.notifier)
-                          .updateJobList(job.id!);
-                      print(list);
+                          .read(handleSavedJobsProvider.notifier)
+                          .update(job.id!);
                     },
                     icon: Icon(
                       Icons.bookmark_add_rounded,
                       size: 28,
-                      color: ref
-                              .read(bookmarkedJobsProvider.notifier)
-                              .list
-                              .contains(job.id)
-                          ? Colors.blue
-                          : Colors.grey,
+                      color: savedJobs.contains(job.id)
+                          ? mainColor
+                          : Color.fromARGB(57, 28, 28, 29),
+
+                      // ref
+                      //         .read(bookmarkedJobsProvider.notifier)
+                      //         .list
+                      //         .contains(job.id)
+                      //     ? Colors.blue
+                      //     : Colors.grey,
                     )),
               ],
             ),

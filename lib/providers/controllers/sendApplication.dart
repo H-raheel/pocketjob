@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pocketjob/models/applications.dart';
 import 'package:pocketjob/providers/applicationRepoprovider.dart';
 import 'package:pocketjob/providers/authProvider.dart';
-import 'package:pocketjob/providers/controllers/applyButtonController.dart';
+import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -80,6 +80,7 @@ class AppliedJobs extends ConsumerWidget {
                                       job: jobs[index],
                                       showLocation: false,
                                       applied: true,
+                                      //  ref: ref,
                                     )));
                               },
                               separatorBuilder: (context, index) => SizedBox(
