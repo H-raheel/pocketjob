@@ -3,15 +3,19 @@ import 'dart:io';
 RegExp pakistanPhoneNumberRegExp = RegExp(r'^\+92\d{10}$');
 RegExp emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 RegExp regex = RegExp(r'^[a-zA-Z]+$');
-
+RegExp yearRegex = RegExp(r'^\d{4}$');
 String? validateString(String? value) {
   if (value == null || value.isEmpty) {
     return 'This field cannot be empty';
   }
 
-  if (!regex.hasMatch(value)) {
+  if (!regex.hasMatch(value.replaceAll(" ", ""))) {
     return 'Please enter only letters';
   }
+  return null;
+}
+
+noValidation(String? value) {
   return null;
 }
 
@@ -21,6 +25,16 @@ String? validatePhoneNumber(String? value) {
   }
   if (!pakistanPhoneNumberRegExp.hasMatch(value)) {
     return 'Please follow the format: +92XXXXXXXXXX';
+  }
+  return null;
+}
+
+String? validatePhoneNumberSyntax(String? value) {
+  if (value == "") return null;
+  if (value != null) {
+    if (!pakistanPhoneNumberRegExp.hasMatch(value)) {
+      return 'Please follow the format: +92XXXXXXXXXX';
+    }
   }
   return null;
 }
@@ -36,6 +50,7 @@ String? validatePasswordsMatch(String? value, String confirm) {
 }
 
 String? validateNonEmpty(File? value) {
+  print("heeeeeeee");
   print(value);
   if (value == null) {
     return 'This field cannot be empty';
@@ -58,5 +73,30 @@ String? validateEmail(String? value) {
   if (!emailRegExp.hasMatch(value)) {
     return 'Please follow the format: example@example.com';
   }
+  return null;
+}
+
+String? validateYear(String? value) {
+  if (value == null || value.isEmpty) {
+    return null; // Return null if the input is null or empty
+  }
+
+  // Regex to match a four-digit number
+  final regex = yearRegex;
+
+  if (!regex.hasMatch(value)) {
+    return 'Invalid year format';
+  }
+
+  final year = int.tryParse(value);
+
+  if (year == null) {
+    return 'Invalid year format';
+  }
+
+  if (year < 1900 || year > 2028) {
+    return 'Year must be between 1900 and 2028';
+  }
+
   return null;
 }

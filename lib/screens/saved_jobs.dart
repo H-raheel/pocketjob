@@ -23,7 +23,7 @@ class SavedJobs extends ConsumerWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        leading: Back(),
+        leading: Back(context: context,),
         centerTitle: true,
         title: Text(
           "Bookmarked",
@@ -138,8 +138,8 @@ class SavedJobs extends ConsumerWidget {
               }
 
               // StreamBuilder<List<JobListing>>(
-              //     stream: userServ()
-              //         .getSavedJobsStream(AuthServ().getUserId()!),
+              //     stream: userRepository()
+              //         .getSavedJobsStream(AuthRepository().getUserId()!),
               //     builder: (context, snapshot) {
               //       if (snapshot.hasData) {
               //         List<JobListing> jobs = snapshot.data!;

@@ -54,15 +54,13 @@ class _ApplyState extends State<Apply> {
       );
       final AsyncValue<void> state = ref.watch(applyForJobProvider);
 
-     // print("heeeeeraeeaeeeeloaading");
-    //  print(state.isLoading);
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          leading: Back(),
+          leading: Back(context: context,),
           centerTitle: true,
           title: Text(
             "Apply for Job",
@@ -70,10 +68,10 @@ class _ApplyState extends State<Apply> {
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: state.isLoading
-                ? const WaitingForProgressLoader()
-                : Form(
+          child: state.isLoading
+              ? const WaitingForProgressLoader()
+              : SingleChildScrollView(
+                  child: Form(
                     key: _formKey,
                     child: Padding(
                       padding: formPadding,
@@ -171,9 +169,17 @@ class _ApplyState extends State<Apply> {
                               height: 20,
                             ),
                             AttachPDFField(
-                                validator: (value) => validateNonEmpty(value),
+                                validator: (value) {
+                                  String? v = validateNonEmpty(value);
+                                  v != null
+                                      ? setState(() {
+                                          error = v;
+                                        })
+                                      : setState(() {
+                                          error = null;
+                                        });
+                                },
                                 label: "Upload CV/Resume",
-                                // hintText: "Browse file",
                                 onFileSelected: onFileSelected),
                             error != null
                                 ? Text(
@@ -190,14 +196,14 @@ class _ApplyState extends State<Apply> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.07,
                                 child: primaryButton("Submit", () async {
-                                  // await ApplicationsServ()
+                                  // await ApplicationsRepository()
                                   //     .uploadFile(pickedFile!);
 
                                   if (_formKey.currentState!.validate()) {
                                     print("validatedd");
 
                                     final application = ApplicationModel(
-                                      userId: "vGJ9LenHvggttunadLiYTXTwnxv2",
+                                      userId: "",
                                       name: nameController.text,
                                       email: emailController.text,
                                       phone: phoneController.text,
@@ -210,26 +216,17 @@ class _ApplyState extends State<Apply> {
                                           : null,
                                       jobId: widget.jobId,
                                     );
-
-                                    print(
-                                        ref.read(applyForJobProvider.notifier));
-
+                                    print(pickedFile!.path);
                                     ref
                                         .read(applyForJobProvider.notifier)
                                         .sendApplication(
                                             application, pickedFile!, context);
-
-                                    // Navigator.pushReplacement(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const Success()));
                                   }
                                 })),
                           ]),
                     ),
                   ),
-          ),
+                ),
         ),
       );
     });

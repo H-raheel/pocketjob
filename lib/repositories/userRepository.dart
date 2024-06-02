@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/models/users.dart';
 
-class userServ {
+class userRepository {
   final CollectionReference users =
       FirebaseFirestore.instance.collection('Users');
   final CollectionReference jobs =
@@ -64,52 +64,22 @@ class userServ {
     }
   }
 
-  // Stream<List<JobListing>> getSavedJobsStream(String userId) async* {
-  //   final userRef = users.doc(userId);
-  //   final userDoc = await userRef.get();
-  //   if (!userDoc.exists) {
-  //     yield [];
-  //     return;
-  //   }
-
-  //   final userData = userDoc.data() as Map<String, dynamic>;
-  //   final savedJobsIds = List<String>.from(userData['savedJobs'] ?? []);
-
-  //   if (savedJobsIds.isEmpty) {
-  //     yield [];
-  //   } else {
-  //     yield* jobs
-  //         .where(FieldPath.documentId, whereIn: savedJobsIds)
-  //         .snapshots()
-  //         .map((querySnapshot) {
-  //       return querySnapshot.docs.map((doc) {
-  //         final jobData = doc.data() as Map<String, dynamic>;
-  //         return JobListing.fromJson({...jobData, 'id': doc.id});
-  //       }).toList();
-  //     });
-  //   }
-  // }
-
   Future<List<String>> getSavedJobs(String userId) async {
     try {
-      // Access the users collection and get the document for the given userId
       DocumentSnapshot userDoc = await users.doc(userId).get();
 
-      // Check if the document exists and contains the 'savedJobs' field
       if (userDoc.exists && userDoc.data() != null) {
         List<dynamic> dynamicList = userDoc.get('savedJobs');
-        // Convert the dynamic list to a list of strings
+
         List<String> savedJobs = dynamicList.cast<String>();
 
         print("heree");
         print(savedJobs);
         return savedJobs;
       } else {
-        // Return an empty list if there are no saved jobs
         return <String>[];
       }
     } catch (e) {
-      // Handle any errors that occur during the read operation
       print('Error getting saved jobs: $e');
       return [];
     }
@@ -143,22 +113,18 @@ class userServ {
 
   Future<List<String>> getAppliedJobs(String userId) async {
     try {
-      // Access the users collection and get the document for the given userId
       DocumentSnapshot userDoc = await users.doc(userId).get();
 
-      // Check if the document exists and contains the 'appliedJobs' field
       if (userDoc.exists && userDoc.data() != null) {
         List<dynamic> dynamicList = userDoc.get('appliedJobs');
-        // Convert the dynamic list to a list of strings
+
         List<String> appliedJobs = dynamicList.cast<String>();
 
         return appliedJobs;
       } else {
-        // Return an empty list if there are no applied jobs
         return <String>[];
       }
     } catch (e) {
-      // Handle any errors that occur during the read operation
       print('Error getting applied jobs: $e');
       return [];
     }
@@ -211,6 +177,15 @@ class userServ {
       });
     } catch (e) {
       throw Exception('Failed to update saved jobs: $e');
+    }
+  }
+
+  Future<void> UpdateUser(UserModel user) async {
+    try {
+      await users.doc(user.userId).update(user.toJson());
+      print("User updated successfully");
+    } catch (e) {
+      throw Exception('Failed to update user: $e');
     }
   }
 }

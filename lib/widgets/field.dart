@@ -9,11 +9,12 @@ import 'package:pocketjob/utils/texts.dart';
 class Field extends StatelessWidget {
   final String label;
   final String hintText;
+  bool defaultVal = true;
   final String? Function(String?)? validator;
   final TextEditingController controller;
-
-  const Field(
+  Field(
       {Key? key,
+      this.defaultVal = true,
       required this.controller,
       required this.label,
       required this.hintText,
@@ -33,9 +34,16 @@ class Field extends StatelessWidget {
           height: 12,
         ),
         TextFormField(
+          enabled: defaultVal,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(
+              disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10)),
+              focusedErrorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                  borderRadius: BorderRadius.circular(10)),
               errorBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red, width: 2),
                   borderRadius: BorderRadius.circular(10)),
@@ -135,16 +143,85 @@ class _PasswordFieldState extends State<PasswordField> {
   }
 }
 
-// void _pickFile() async {
-//   FilePickerResult? result = await FilePicker.platform.pickFiles(
-//     allowedExtensions: ['pdf'],
-//   );
-//   if (result != null && result.files.single.path != null) {
-//     PlatformFile file = result.files.first;
-//     print("thisssssssssssssssssssssssssssssssssssssssss");
-//     print(file.name);
-//   }
-// }
+class CustomDropDownField extends StatefulWidget {
+  final List<String> list;
+  final String label;
+  String? current;
+  final IconData icon;
+  final ValueChanged<String?>? onChanged; // Add a callback parameter
+
+  CustomDropDownField({
+    super.key,
+    required this.list,
+    required this.label,
+    required this.icon,
+    required this.current,
+    this.onChanged, // Initialize the callback parameter
+  });
+
+  @override
+  State<CustomDropDownField> createState() => _CustomDropDownFieldState();
+}
+
+class _CustomDropDownFieldState extends State<CustomDropDownField> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.current != null && !widget.list.contains(widget.current)) {
+      widget.current = null; // Reset current if it's not a valid value
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label,
+          style: heading2(),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        Container(
+          height: 60,
+          child: DropdownButtonFormField<String>(
+            value: widget.current != "" ? widget.current : null,
+            itemHeight: 55,
+            items: widget.list
+                .map((g) => DropdownMenuItem(child: Text(g), value: g))
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                widget.current = value;
+              });
+              if (widget.onChanged != null) {
+                widget.onChanged!(value); // Trigger the callback
+              }
+            },
+            icon: Icon(
+              Icons.arrow_drop_down,
+              color: Theme.of(context).primaryColor,
+            ),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: fieldColor,
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              prefixIcon: Icon(
+                widget.icon,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class AttachPDFField extends StatefulWidget {
   final String label;
@@ -208,7 +285,7 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
                                     selectedFile = file;
                                   });
 
-                                  // Call callback function with selected file
+                                
                                   if (widget.onFileSelected != null) {
                                     widget.onFileSelected!(sendVal);
                                   }

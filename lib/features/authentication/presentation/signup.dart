@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:pocketjob/providers/controllers/signInController.dart';
-import 'package:pocketjob/screens/signin.dart';
-import 'package:pocketjob/services/authentication.dart';
+import 'package:pocketjob/features/authentication/presentation/signInController.dart';
+import 'package:pocketjob/features/authentication/presentation/signin.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
@@ -12,7 +11,6 @@ import 'package:pocketjob/widgets/buttons.dart';
 import 'package:pocketjob/widgets/field.dart';
 
 class SignUp extends StatefulWidget {
-  final AuthServ auth = AuthServ();
   SignUp({super.key});
 
   @override
@@ -86,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                           hintText: "",
                           validator: (value) => validatePasswordsMatch(
                               value, passwordController.text)),
-                     const SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           height: MediaQuery.of(context).size.height * 0.07,

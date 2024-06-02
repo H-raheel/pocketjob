@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocketjob/models/jobListing.dart';
 
-class JobsServ {
+class JobsRepository {
   final CollectionReference jobs =
       FirebaseFirestore.instance.collection('Jobs');
 

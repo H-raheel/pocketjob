@@ -1,11 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
 import 'package:pocketjob/models/applications.dart';
-
-import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
-
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,7 +26,7 @@ class ApplyForJob extends _$ApplyForJob {
     try {
       print("inheree");
       state = const AsyncValue.loading();
-      final user = ref.read(authProvider).getUser();
+      final user = ref.read(authRepositoryProvider).getUser();
 
       final applicationWithUserId = ApplicationModel(
         userId: user!.uid,
@@ -43,10 +41,11 @@ class ApplyForJob extends _$ApplyForJob {
         pdfUrl: application.pdfUrl,
       );
       final applicationservice = ref.read(applicationserviceProvider);
-      final userservice = ref.read(userserviceProvider);
+      final userservice = ref.read(userRepositoryProvider);
 
       await applicationservice.saveApplication(applicationWithUserId, file);
       await userservice.saveAppliedJobToUser(user.uid, application.jobId);
+      ref.read(jobApplicationsProvider.notifier).add(application.jobId);
       ref.read(jobApplicationsProvider.notifier).getjobs();
     } catch (e) {
       state = AsyncValue.error(Error, StackTrace.current);

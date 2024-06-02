@@ -21,7 +21,9 @@ class AppliedJobs extends ConsumerWidget {
         scrolledUnderElevation: 0,
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        leading: Back(),
+        leading: Back(
+          context: context,
+        ),
         centerTitle: true,
         title: Text(
           "Applied",

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/handleSavedJobs.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class JobListingCard extends ConsumerWidget {
@@ -125,9 +124,8 @@ class JobListingCard extends ConsumerWidget {
                   )
                 : Container(),
             // const SizedBox(height: 10),
-            Wrap(
-              spacing: 6,
-              alignment: WrapAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: job.type
                   .map((e) => Chip(
                       backgroundColor: Theme.of(context).colorScheme.secondary,

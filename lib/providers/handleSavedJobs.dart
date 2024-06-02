@@ -1,5 +1,5 @@
 // import 'package:pocketjob/providers/authProvider.dart';
-// import 'package:pocketjob/providers/userServprovider.dart';
+// import 'package:pocketjob/providers/userRepositoryprovider.dart';
 // import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // part 'applyButtonController.g.dart';
@@ -13,9 +13,9 @@
 
 //   void getjobs() async {
 //     final userservice = ref.read(userserviceProvider);
-//     final authServ = ref.read(authProvider);
+//     final authRepository = ref.read(authProvider);
 //     List<String> jobs =
-//         await userservice.getAppliedJobs(authServ.getUserId()!);
+//         await userservice.getAppliedJobs(authRepository.getUserId()!);
 //     state = jobs;
 
 //     ref.notifyListeners();
@@ -36,7 +36,7 @@
 // final applications = jobApplicationsProvider;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
 import 'package:pocketjob/providers/userRepoprovider.dart';
 
 final handleSavedJobsProvider =
@@ -50,9 +50,9 @@ class handleSavedJobs extends StateNotifier<List<String>> {
   handleSavedJobs(this.ref) : super([]);
 
   Future<void> getjobs() async {
-    final userservice = ref.read(userserviceProvider);
-    final authServ = ref.read(authProvider);
-    final userId = authServ.getUserId();
+    final userservice = ref.read(userRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
+    final userId = authRepository.getUserId();
 
     if (userId != null) {
       List<String> jobs = await userservice.getSavedJobs(userId);
@@ -84,9 +84,9 @@ class handleSavedJobs extends StateNotifier<List<String>> {
   }
 
   void updateSavedJobsList() async {
-    final userservice = ref.read(userserviceProvider);
-    final authServ = ref.read(authProvider);
-    final userId = authServ.getUserId();
+    final userservice = ref.read(userRepositoryProvider);
+    final authRepository = ref.read(authRepositoryProvider);
+    final userId = authRepository.getUserId();
     await userservice.sendSavedJobsToUser(userId!, state);
   }
 }

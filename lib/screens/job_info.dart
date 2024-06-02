@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/handleAppliedJobs.dart';
 import 'package:pocketjob/screens/apply.dart';
-import 'package:pocketjob/utils/colors.dart';
+import 'package:pocketjob/utils/helperfunctions.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
@@ -32,7 +32,7 @@ class JobInfoScreen extends ConsumerWidget {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          leading: Back(),
+          leading: Back(context: context,),
         ),
         body: SafeArea(
             child: Stack(
@@ -55,7 +55,7 @@ class JobInfoScreen extends ConsumerWidget {
                       left: 6),
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.tertiary,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
                   width: MediaQuery.of(context).size.width,
@@ -94,19 +94,27 @@ class JobInfoScreen extends ConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            c_Card(context, Icons.money, "Salary(Monthly)",
-                                jobDetails.salary.toString()),
-                            c_Card(context, Icons.business_center, "Job Type",
-                                jobDetails.type[0]),
+                            DisplayCard(
+                                icon: Icons.money,
+                                heading: "Salary(Monthly)",
+                                sub: jobDetails.salary.toString()),
+                            DisplayCard(
+                                icon: Icons.business_center,
+                                heading: "Job Type",
+                                sub: jobDetails.type[0]),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            c_Card(context, Icons.apartment, "Working Mode",
-                                jobDetails.type[1]),
-                            c_Card(context, Icons.bar_chart, "Level",
-                                jobDetails.type[2]),
+                            DisplayCard(
+                                icon: Icons.apartment,
+                                heading: "Working Mode",
+                                sub: jobDetails.type[1]),
+                            DisplayCard(
+                                icon: Icons.bar_chart,
+                                heading: "Level",
+                                sub: jobDetails.type[2]),
                           ],
                         ),
                         Divider(),
@@ -123,7 +131,7 @@ class JobInfoScreen extends ConsumerWidget {
                                 height: 12,
                               ),
                               Text(
-                                jobDetails.companyInfo,
+                                trimString(jobDetails.companyInfo),
                                 style: body(),
                               ),
                               SizedBox(
@@ -137,13 +145,12 @@ class JobInfoScreen extends ConsumerWidget {
                                 height: 12,
                               ),
                               ReadMoreText(
-                                jobDetails.description,
-                                trimLength: 200,
+                                bulletSentences(jobDetails.description),
                                 style: body(),
                                 colorClickableText:
                                     Theme.of(context).colorScheme.primary,
                                 trimCollapsedText: 'more',
-                                trimExpandedText: 'show less',
+                                trimExpandedText: '.show less',
                               ),
                             ],
                           ),
@@ -160,7 +167,7 @@ class JobInfoScreen extends ConsumerWidget {
                       border: Border.all(
                           color: const Color.fromARGB(255, 212, 212, 212)),
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))),
                   width: MediaQuery.of(context).size.width,
@@ -169,7 +176,6 @@ class JobInfoScreen extends ConsumerWidget {
 
                   child: Container(
                     child: primaryButton("Apply for Job", () async {
-                      
                       !applied
                           ? Navigator.push(
                               context,
@@ -194,11 +200,15 @@ class JobInfoScreen extends ConsumerWidget {
               bottom: MediaQuery.of(context).size.height * 0.75,
               right: 0,
               left: 0,
-              child: CircleAvatar(
-                radius: 50,
-                child: Image.network(
-                  jobDetails.imageUrl,
-                ),
+              child: Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                      jobDetails.imageUrl,
+                    ))),
               ),
             ),
           ],

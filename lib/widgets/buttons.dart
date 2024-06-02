@@ -5,9 +5,24 @@ ElevatedButton primaryButton(String message, function()) {
     onPressed: function,
     child: Text(
       message,
-      style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+      style: const TextStyle(
+          color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
     ),
-    style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFF2623D2)),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color.fromARGB(255, 29, 26, 215),
+    ),
   );
+}
+
+ElevatedButton secondaryButton(String message, function()) {
+  return ElevatedButton(
+      onPressed: function,
+      child: Text(
+        message,
+        style: const TextStyle(
+            color: Color.fromARGB(255, 29, 26, 215),
+            fontWeight: FontWeight.w600,
+            fontSize: 20),
+      ),
+      style: ElevatedButton.styleFrom(backgroundColor: Colors.white));
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:pocketjob/providers/controllers/signInController.dart';
-import 'package:pocketjob/screens/signup.dart';
+import 'package:pocketjob/features/authentication/presentation/signInController.dart';
+import 'package:pocketjob/features/authentication/presentation/signup.dart';
 import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';

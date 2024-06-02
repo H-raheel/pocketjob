@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/displayJobs.dart';
 import 'package:pocketjob/providers/searchProvider.dart';
+import 'package:pocketjob/providers/userProvider.dart';
 import 'package:pocketjob/screens/job_info.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/job_listing_card.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dataNotifier = ref.watch(displayProvider);
     final searchControllerProvider = ref.watch(searchProvider);
+    // final userData = ref.read(CurrentUserProvider);
 
     return Scaffold(
         body: SafeArea(
@@ -36,53 +38,88 @@ class HomeScreen extends ConsumerWidget {
             child: switch (dataNotifier) {
               AsyncData(:final value) => value == []
                   ? Center(
-                      child: Text(
-                      "No Jobs Available",
-                      style: subheading(),
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.work_rounded,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                        Text(
+                          "No Jobs Available",
+                          style: subheading(),
+                        )
+                      ],
                     ))
-                  : ListView.builder(
-                      itemCount: value.length,
-                      itemBuilder: (context, index) {
-                        List<JobListing> jobs = value;
-                        JobListing current = jobs[index];
-                        if (searchControllerProvider == "") {
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => JobInfoScreen(
-                                            jobDetails: current)));
-                              },
-                              child: (JobListingCard(
-                                job: current,
-                                showLocation: true,
-                                applied: false,
-                                // ref: ref,
-                              )));
-                        } else if (current.title
-                            .toLowerCase()
-                            .contains(searchControllerProvider.toLowerCase())) {
-                          print("printintntnt");
-                          print(searchControllerProvider);
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => JobInfoScreen(
-                                            jobDetails: current)));
-                              },
-                              child: (JobListingCard(
-                                job: current,
-                                showLocation: true,
-                                applied: false,
-                                //  ref: ref,
-                              )));
-                        } else {
-                          return null;
-                        }
-                      }),
+                  : Builder(builder: (context) {
+                      List<JobListing> jobs = value;
+                      List<JobListing> filteredList = jobs
+                          .where((job) => (job.title.toLowerCase().contains(
+                              searchControllerProvider.toLowerCase())))
+                          .toList();
+
+                      return filteredList.isEmpty
+                          ? Center(
+                              child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.work_rounded,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                                Text(
+                                  "No Jobs Available",
+                                  style: subheading(),
+                                )
+                              ],
+                            ))
+                          : ListView.builder(
+                              itemCount: filteredList.length,
+                              itemBuilder: (context, index) {
+                                List<JobListing> jobs = filteredList;
+                                JobListing current = jobs[index];
+                                if (searchControllerProvider == "") {
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    JobInfoScreen(
+                                                        jobDetails: current)));
+                                      },
+                                      child: (JobListingCard(
+                                        job: current,
+                                        showLocation: true,
+                                        applied: false,
+                                        // ref: ref,
+                                      )));
+                                } else if (current.title.toLowerCase().contains(
+                                    searchControllerProvider.toLowerCase())) {
+                                  print("printintntnt");
+                                  print(searchControllerProvider);
+                                  return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    JobInfoScreen(
+                                                        jobDetails: current)));
+                                      },
+                                      child: (JobListingCard(
+                                        job: current,
+                                        showLocation: true,
+                                        applied: false,
+                                        //  ref: ref,
+                                      )));
+                                } else {
+                                  return null;
+                                }
+                              });
+                    }),
               AsyncError(:final error) =>
                 Center(child: Text(error.toString() + "error.try again ")),
               AsyncLoading() => (const WaitingForProgressLoader()),
@@ -100,8 +137,8 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Welcome, Humera!!",
+              Text(
+                "Welcome, ${ref.read(CurrentUserProvider)?.name ?? 'User'}",
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -110,7 +147,8 @@ class HomeScreen extends ConsumerWidget {
               Spacer(),
               TextField(
                   onChanged: (value) => update(ref, value),
-                  controller: searchController,
+
+                  ///   controller: searchController,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(12),
                     hintText: "Search",

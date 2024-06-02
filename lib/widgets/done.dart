@@ -10,14 +10,17 @@ class Done extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return Dialog(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
-      content: Container(
+      child: Container(
+        padding: EdgeInsets.only(bottom: 10),
+        height: MediaQuery.of(context).size.height * 0.2,
+        width: MediaQuery.of(context).size.width * 0.3,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -26,7 +29,7 @@ class Done extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop(); // Closes the dialog
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.cancel_outlined,
                       color: Colors.grey,
                     )),
@@ -34,12 +37,12 @@ class Done extends StatelessWidget {
             ),
             Icon(
               Icons.done_rounded,
-              size: 20,
+              size: 50,
               color: Theme.of(context).colorScheme.primary,
             ),
             Text(
               message,
-              style: subheading2(),
+              style: body2(),
             ),
           ],
         ),
