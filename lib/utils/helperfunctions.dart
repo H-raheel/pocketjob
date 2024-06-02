@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 String trimString(String input) {
   return input.trim();
 }
@@ -11,4 +13,13 @@ String bulletSentences(String paragraph) {
       .toList();
 
   return filteredSentences.join('\n');
+}
+
+String formatNumber(String value) {
+  int number = int.parse(value);
+
+  NumberFormat formatter = NumberFormat('#,###');
+  String formattedValue = formatter.format(number);
+
+  return formattedValue;
 }

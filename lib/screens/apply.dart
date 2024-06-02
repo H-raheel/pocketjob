@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/applications.dart';
 import 'package:pocketjob/providers/controllers/sendApplication.dart';
 import 'package:pocketjob/screens/error.dart';
-import 'package:pocketjob/utils/colors.dart';
+
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/back.dart';
@@ -60,7 +60,9 @@ class _ApplyState extends State<Apply> {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          leading: Back(context: context,),
+          leading: Back(
+            context: context,
+          ),
           centerTitle: true,
           title: Text(
             "Apply for Job",
@@ -74,7 +76,7 @@ class _ApplyState extends State<Apply> {
                   child: Form(
                     key: _formKey,
                     child: Padding(
-                      padding: formPadding,
+                      padding: EdgeInsets.all(26),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

@@ -94,8 +94,8 @@ String? validateYear(String? value) {
     return 'Invalid year format';
   }
 
-  if (year < 1900 || year > 2028) {
-    return 'Year must be between 1900 and 2028';
+  if (year < 1990 || year > 2028) {
+    return 'Year must be between 1990 and 2028';
   }
 
   return null;

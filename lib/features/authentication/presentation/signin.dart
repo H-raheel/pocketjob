@@ -1,9 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketjob/features/authentication/presentation/signInController.dart';
 import 'package:pocketjob/features/authentication/presentation/signup.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/alert.dart';
@@ -25,13 +25,13 @@ class SignIn extends ConsumerWidget {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: formPadding,
+              padding: EdgeInsets.all(26),
               child: Form(
                 key: _formKey,
                 child: Column(children: [
                   Container(
                       height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: MediaQuery.of(context).size.width * 0.3,
                       child: Image.asset(
                         'assets/images/logo.png',
                         fit: BoxFit.fill,
@@ -42,10 +42,10 @@ class SignIn extends ConsumerWidget {
                   ),
                   Text(
                     "Hi!Welcome back, youve been missed",
-                    style: body(),
+                    style: body2(),
                   ),
                   const SizedBox(
-                    height: 12,
+                    height: 10,
                   ),
                   Field(
                     controller: _emailController,
@@ -130,23 +130,47 @@ class SignIn extends ConsumerWidget {
                             );
                     },
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Dont have an account?",
-                        style: subheading(),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
+                  const SizedBox(height: 10),
+                  RichText(
+                    text: TextSpan(
+                      text: "Don't have an account? ",
+                      style: subheading2(),
+                      children: [
+                        TextSpan(
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()));
-                          },
-                          child: Text("Sign Up", style: blue_subheading()))
-                    ],
-                  )
+                                  builder: (context) => SignUp(),
+                                ),
+                              );
+                            },
+                          text: "Register Now!",
+                          style: blue_subheading(),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Text(
+                  //       "Dont have an account?",
+                  //       style: subheading2(),
+                  //     ),
+                  //     TextButton(
+                  //         onPressed: () {
+                  //           Navigator.pushReplacement(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                   builder: (context) => SignUp()));
+                  //         },
+                  //         child:
+                  //             Text("Register Now!", style: blue_subheading()))
+                  //   ],
+                  // )
                 ]),
               ),
             ),

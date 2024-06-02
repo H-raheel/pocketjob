@@ -1,9 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketjob/features/authentication/presentation/signInController.dart';
 import 'package:pocketjob/features/authentication/presentation/signin.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/alert.dart';
@@ -32,7 +32,7 @@ class _SignUpState extends State<SignUp> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: formPadding,
+              padding: EdgeInsets.all(26),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -130,23 +130,30 @@ class _SignUpState extends State<SignUp> {
                                     }
                                   });
                           })),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account?",
-                            style: subheading(),
-                          ),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
+                      SizedBox(
+                        height: 10,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: "Already have an account? ",
+                          style: subheading2(),
+                          children: [
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignIn()));
-                              },
-                              child: Text("Sign In", style: blue_subheading()))
-                        ],
-                      )
+                                      builder: (context) => SignIn(),
+                                    ),
+                                  );
+                                },
+                              text: "Log In!",
+                              style: blue_subheading(),
+                            ),
+                          ],
+                        ),
+                      ),
                     ]),
               ),
             ),

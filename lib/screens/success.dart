@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/screens/applied.dart';
-import 'package:pocketjob/screens/home_screen.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/buttons.dart';
 
 class Success extends StatelessWidget {
@@ -64,7 +63,7 @@ class Success extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
+                                    builder: (context) => BottomNav()));
                           }),
                         ),
                       ]),
@@ -103,7 +102,7 @@ class Success extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      "You can check your application progress in Applied.",
+                      "You can check your applications in Applied.",
                       style: subheading(),
                       textAlign: TextAlign.center,
                     )

@@ -32,7 +32,9 @@ class JobInfoScreen extends ConsumerWidget {
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          leading: Back(context: context,),
+          leading: Back(
+            context: context,
+          ),
         ),
         body: SafeArea(
             child: Stack(
@@ -97,7 +99,8 @@ class JobInfoScreen extends ConsumerWidget {
                             DisplayCard(
                                 icon: Icons.money,
                                 heading: "Salary(Monthly)",
-                                sub: jobDetails.salary.toString()),
+                                sub:
+                                    formatNumber(jobDetails.salary.toString())),
                             DisplayCard(
                                 icon: Icons.business_center,
                                 heading: "Job Type",

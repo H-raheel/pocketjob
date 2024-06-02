@@ -1,6 +1,3 @@
-import 'dart:js';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/features/authentication/presentation/signInController.dart';
@@ -19,18 +16,18 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<void> state = ref.watch(authControllerProvider);
-    ref.listen<AsyncValue<void>>(
-      authControllerProvider,
-      (_, state) => state.whenOrNull(
-        error: (error, stackTrace) {
-          print("SHHHHOOWNG" + error.toString().replaceAll("Exception: ", ""));
-          showDialog(
-              context: context,
-              builder: (context) => Warning(
-                  message: error.toString().replaceAll("Exception: ", "")));
-        },
-      ),
-    );
+    // ref.listen<AsyncValue<void>>(
+    //   authControllerProvider,
+    //   (_, state) => state.whenOrNull(
+    //     error: (error, stackTrace) {
+    //       print("SHHHHOOWNG" + error.toString().replaceAll("Exception: ", ""));
+    //       showDialog(
+    //           context: context,
+    //           builder: (context) => Warning(
+    //               message: error.toString().replaceAll("Exception: ", "")));
+    //     },
+    //   ),
+    // );
 
     return state.isLoading
         ? Scaffold(

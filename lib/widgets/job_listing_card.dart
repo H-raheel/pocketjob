@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/handleSavedJobs.dart';
+import 'package:pocketjob/utils/helperfunctions.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class JobListingCard extends ConsumerWidget {
@@ -147,7 +148,7 @@ class JobListingCard extends ConsumerWidget {
                         RichText(
                           text: TextSpan(
                             text: job.salary != null
-                                ? "Rs " + job.salary.toString()
+                                ? "Rs " + formatNumber(job.salary.toString())
                                 : "",
                             style: blue_subheading(),
                             children: <TextSpan>[

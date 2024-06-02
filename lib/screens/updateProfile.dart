@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/users.dart';
 import 'package:pocketjob/providers/userProvider.dart';
-import 'package:pocketjob/utils/colors.dart';
+
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/back.dart';
@@ -78,7 +78,7 @@ class _EditprofileState extends ConsumerState<Editprofile> {
           child: Form(
             key: _formKey,
             child: Padding(
-              padding: formPadding,
+              padding: EdgeInsets.all(26),
               child: Column(
                 children: [
                   Field(

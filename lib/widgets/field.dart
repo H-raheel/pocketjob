@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pocketjob/utils/colors.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class Field extends StatelessWidget {
@@ -55,7 +54,7 @@ class Field extends StatelessWidget {
               contentPadding: EdgeInsets.all(10),
               hintText: hintText,
               hintStyle: subheading2(),
-              fillColor: fieldColor,
+              fillColor: Color.fromARGB(69, 212, 210, 210),
               filled: true,
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide.none,
@@ -120,7 +119,7 @@ class _PasswordFieldState extends State<PasswordField> {
               contentPadding: const EdgeInsets.all(10),
               hintText: widget.hintText,
               hintStyle: subheading2(),
-              fillColor: fieldColor,
+              fillColor: Color.fromARGB(69, 212, 210, 210),
               filled: true,
               suffixIcon: IconButton(
                 icon: Icon(
@@ -206,7 +205,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
             ),
             decoration: InputDecoration(
               filled: true,
-              fillColor: fieldColor,
+              fillColor: Color.fromARGB(69, 212, 210, 210),
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(10),
@@ -263,7 +262,8 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(40),
                 decoration: BoxDecoration(
-                    color: fieldColor, borderRadius: BorderRadius.circular(10)),
+                    color: Color.fromARGB(69, 212, 210, 210),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   children: selectedFile == null
                       ? [
@@ -285,7 +285,6 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
                                     selectedFile = file;
                                   });
 
-                                
                                   if (widget.onFileSelected != null) {
                                     widget.onFileSelected!(sendVal);
                                   }

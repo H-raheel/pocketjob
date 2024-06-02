@@ -23,16 +23,18 @@ class MyApp extends StatelessWidget {
         title: 'Pocket Job',
         theme: ThemeData(
           //scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(backgroundColor: Color(0xFFFFFBFF)),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFFFFBFF)),
 
-          scaffoldBackgroundColor: Color(0xFFFFFBFF),
+          scaffoldBackgroundColor: const Color(0xFFFFFBFF),
 
           colorScheme: ColorScheme.fromSeed(
-              seedColor: Color.fromARGB(255, 248, 248, 255),
-              primary: Color.fromARGB(255, 29, 26, 215),
-              secondary: Color(0xFFF6F6F6),
-              tertiary: Color(0xFFFDFDFD),
-              onPrimaryContainer: const Color.fromARGB(255, 212, 212, 212)),
+            seedColor: Color.fromARGB(255, 248, 248, 255),
+            primary: Color.fromARGB(255, 29, 26, 215),
+            secondary: Color(0xFFF6F6F6),
+            tertiary: Color(0xFFFDFDFD),
+            // onPrimaryContainer: const Color.fromARGB(255, 212, 212, 212)
+            // onPrimaryContainer: Color.fromARGB(69, 212, 210, 210),
+          ),
           useMaterial3: true,
         ),
         home: SplashScreen());
