@@ -7,8 +7,10 @@ import 'package:pocketjob/features/authentication/presentation/signup.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/alert.dart';
-import 'package:pocketjob/widgets/buttons.dart';
-import 'package:pocketjob/widgets/field.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+
+import 'package:pocketjob/widgets/fields/field.dart';
+import 'package:pocketjob/widgets/fields/password_field.dart';
 
 class SignIn extends ConsumerWidget {
   SignIn({super.key});
@@ -95,7 +97,7 @@ class SignIn extends ConsumerWidget {
                                         MediaQuery.of(context).size.width * 0.5,
                                     height: MediaQuery.of(context).size.height *
                                         0.07,
-                                    child: primaryButton("Sign In", () {
+                                    child: PrimaryButton(message:"Sign In",function: () {
                                       if (_formKey.currentState!.validate()) {
                                         ref
                                             .read(

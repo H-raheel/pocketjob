@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pocketjob/screens/applied.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
-import 'package:pocketjob/widgets/buttons.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+
 
 class Success extends StatelessWidget {
   const Success({super.key});
@@ -15,18 +16,7 @@ class Success extends StatelessWidget {
         body: SafeArea(
             child: Stack(
           children: [
-            // Container(
-            //   padding: EdgeInsets.all(16),
-            //   color: Color(0xFFFDFDFD),
-            //   width: MediaQuery.of(context).size.width,
-            //   height: MediaQuery.of(context).size.height,
-            //   child: Column(
-            //     children: [
-            //       Back(),
-            //     ],
-            //   ),
-            // ),
-            //),
+           
             Positioned(
                 bottom: 0,
                 child: Container(
@@ -46,7 +36,7 @@ class Success extends StatelessWidget {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.07,
-                          child: primaryButton("Go to Applications", () {
+                          child: PrimaryButton(message:"Go to Applications",function: () {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -59,7 +49,7 @@ class Success extends StatelessWidget {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.07,
-                          child: primaryButton("Go to Home", () {
+                          child: PrimaryButton(message:"Go to Home", function:() {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

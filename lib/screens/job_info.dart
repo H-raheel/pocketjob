@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/handleAppliedJobs.dart';
+import 'package:pocketjob/providers/appliedJobsHandler.dart';
 import 'package:pocketjob/screens/apply.dart';
 import 'package:pocketjob/utils/helperfunctions.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
 import 'package:pocketjob/widgets/tile.dart';
 import 'package:readmore/readmore.dart';
-
-import '../widgets/buttons.dart';
 
 class JobInfoScreen extends ConsumerWidget {
   final JobListing jobDetails;
@@ -29,8 +28,8 @@ class JobInfoScreen extends ConsumerWidget {
 
     return Scaffold(
         appBar: AppBar(
-          scrolledUnderElevation: 0,
-          elevation: 0,
+          //  scrolledUnderElevation: 0,
+          //  elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.secondary,
           leading: Back(
             context: context,
@@ -178,23 +177,25 @@ class JobInfoScreen extends ConsumerWidget {
                   //        child: Consumer(builder: (context, ref, child) {
 
                   child: Container(
-                    child: primaryButton("Apply for Job", () async {
-                      !applied
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Apply(
-                                        jobId: jobDetails.id!,
-                                      )))
-                          : showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return const Warning(
-                                    message:
-                                        'You have already applied for this job. Please wait patiently for the response.');
-                              },
-                            );
-                    }),
+                    child: PrimaryButton(
+                        message: "Apply for Job",
+                        function: () async {
+                          !applied
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Apply(
+                                            jobId: jobDetails.id!,
+                                          )))
+                              : showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const Warning(
+                                        message:
+                                            'You have already applied for this job. Please wait patiently for the response.');
+                                  },
+                                );
+                        }),
                   )
                   //         }
                   ),

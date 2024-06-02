@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pocketjob/repositories/userRepository.dart';
 
 class AuthRepository {
   AuthRepository(this._auth);
   final FirebaseAuth _auth;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  userRepository dbRepository = userRepository();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -42,10 +39,6 @@ class AuthRepository {
     try {
       final UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      final User? user = userCredential.user;
-      if (user != null) {
-        await dbRepository.getUser(user.uid.toString());
-      }
     } on FirebaseAuthException catch (e) {
       print("errrr");
       print(e.message);

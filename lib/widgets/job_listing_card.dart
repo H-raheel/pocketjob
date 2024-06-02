@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
-import 'package:pocketjob/providers/handleSavedJobs.dart';
+import 'package:pocketjob/providers/savedJobsHandler.dart';
 import 'package:pocketjob/utils/helperfunctions.dart';
 import 'package:pocketjob/utils/texts.dart';
 
@@ -24,7 +24,6 @@ class JobListingCard extends ConsumerWidget {
     final savedJobs = ref.watch(handleSavedJobsProvider);
     print(savedJobs.toString() + "saved jobs in card");
     return Card(
-      elevation: 2,
       child: Container(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
         width: MediaQuery.of(context).size.width * 0.75,
@@ -52,55 +51,60 @@ class JobListingCard extends ConsumerWidget {
                 : Container(),
             Row(
               children: [
-                Container(
-                  height: 60,
-                  width: 60,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      image:
-                          DecorationImage(image: NetworkImage(job.imageUrl))),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: NetworkImage(job.imageUrl),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 Expanded(
-                  flex: 8,
+                  flex: 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        child: Text(
-                          job.title,
-                          style: heading2(),
-                          // maxLines: 2,
-                        ),
+                      Text(
+                        job.title,
+                        style: heading2(),
+                        // maxLines: 2,
                       ),
                       Text(job.company, style: company_name()),
                     ],
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                    onPressed: () async {
-                      ref
-                          .read(handleSavedJobsProvider.notifier)
-                          .update(job.id!);
-                    },
-                    icon: Icon(
-                      Icons.bookmark_add_rounded,
-                      size: 28,
-                      color: savedJobs.contains(job.id)
-                          ? Theme.of(context).colorScheme.primary
-                          : Color.fromARGB(57, 28, 28, 29),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      onPressed: () async {
+                        ref
+                            .read(handleSavedJobsProvider.notifier)
+                            .update(job.id!);
+                      },
+                      icon: Icon(
+                        Icons.bookmark_add_rounded,
+                        size: 28,
+                        color: savedJobs.contains(job.id)
+                            ? Theme.of(context).colorScheme.primary
+                            : Color.fromARGB(57, 28, 28, 29),
 
-                      // ref
-                      //         .read(bookmarkedJobsProvider.notifier)
-                      //         .list
-                      //         .contains(job.id)
-                      //     ? Colors.blue
-                      //     : Colors.grey,
-                    )),
+                        // ref
+                        //         .read(bookmarkedJobsProvider.notifier)
+                        //         .list
+                        //         .contains(job.id)
+                        //     ? Colors.blue
+                        //     : Colors.grey,
+                      )),
+                ),
               ],
             ),
             // const SizedBox(
@@ -114,7 +118,7 @@ class JobListingCard extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       Text(
-                        job.city != null ? job.city! + " , " : "",
+                        job.city != null ? "${job.city!} , " : "",
                         style: company_name(),
                       ),
                       Text(
@@ -148,7 +152,7 @@ class JobListingCard extends ConsumerWidget {
                         RichText(
                           text: TextSpan(
                             text: job.salary != null
-                                ? "Rs " + formatNumber(job.salary.toString())
+                                ? "Rs ${formatNumber(job.salary.toString())}"
                                 : "",
                             style: blue_subheading(),
                             children: <TextSpan>[

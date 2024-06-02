@@ -27,7 +27,7 @@ class DisplayCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         child: Row(
           children: [
-            Flexible(
+            Expanded(
               flex: 1,
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -38,7 +38,7 @@ class DisplayCard extends StatelessWidget {
               ),
             ),
             SizedBox(width: 6),
-            Flexible(
+            Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

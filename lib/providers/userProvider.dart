@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/users.dart';
-import 'package:pocketjob/providers/handleAppliedJobs.dart';
-import 'package:pocketjob/providers/handleSavedJobs.dart';
-import 'package:pocketjob/providers/userRepoprovider.dart';
+import 'package:pocketjob/providers/appliedJobsHandler.dart';
+import 'package:pocketjob/providers/savedJobsHandler.dart';
+import 'package:pocketjob/providers/RepoProviders.dart';
+
 
 final CurrentUserProvider =
     StateNotifierProvider<CurrentUser, UserModel?>((ref) {

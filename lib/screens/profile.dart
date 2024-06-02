@@ -5,7 +5,9 @@ import 'package:pocketjob/screens/updateProfile.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
-import 'package:pocketjob/widgets/buttons.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+import 'package:pocketjob/widgets/button/secondarybutton.dart';
+
 import 'package:pocketjob/widgets/optionstile.dart';
 import 'package:pocketjob/widgets/progressLoader.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -72,7 +74,7 @@ class ProfileScreen extends ConsumerWidget {
                               children: [
                                 Text("Are you sure you want to log out?",
                                     style: body3()),
-                                SizedBox(
+                               const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
@@ -82,9 +84,9 @@ class ProfileScreen extends ConsumerWidget {
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
-                                      child: primaryButton(
-                                          "Log Out",
-                                          () => ref
+                                      child: PrimaryButton(
+                                        message:  "Log Out",
+                                        function:  () => ref
                                               .read(authControllerProvider
                                                   .notifier)
                                               .signOut(context)),
@@ -92,8 +94,8 @@ class ProfileScreen extends ConsumerWidget {
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
-                                      child: secondaryButton("Cancel",
-                                          () => Navigator.pop(context)),
+                                      child: SecondaryButton(message:"Cancel",
+                                         function: () => Navigator.pop(context)),
                                     )
                                   ],
                                 )

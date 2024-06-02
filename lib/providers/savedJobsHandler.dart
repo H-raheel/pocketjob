@@ -37,7 +37,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
-import 'package:pocketjob/providers/userRepoprovider.dart';
+import 'package:pocketjob/providers/RepoProviders.dart';
 
 final handleSavedJobsProvider =
     StateNotifierProvider<handleSavedJobs, List<String>>((ref) {

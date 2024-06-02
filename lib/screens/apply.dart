@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/applications.dart';
 import 'package:pocketjob/providers/controllers/sendApplication.dart';
 import 'package:pocketjob/screens/error.dart';
-
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/back.dart';
-import 'package:pocketjob/widgets/buttons.dart';
-import 'package:pocketjob/widgets/field.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+import 'package:pocketjob/widgets/fields/attachpdf_field.dart';
+import 'package:pocketjob/widgets/fields/field.dart';
 import 'package:pocketjob/widgets/progressLoader.dart';
 
 class Apply extends StatefulWidget {
@@ -55,11 +55,10 @@ class _ApplyState extends State<Apply> {
       final AsyncValue<void> state = ref.watch(applyForJobProvider);
 
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        //  backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
           scrolledUnderElevation: 0,
-          elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
+         
           leading: Back(
             context: context,
           ),
@@ -197,34 +196,37 @@ class _ApplyState extends State<Apply> {
                                 width: MediaQuery.of(context).size.width,
                                 height:
                                     MediaQuery.of(context).size.height * 0.07,
-                                child: primaryButton("Submit", () async {
-                                  // await ApplicationsRepository()
-                                  //     .uploadFile(pickedFile!);
+                                child: PrimaryButton(
+                                    message: "Submit",
+                                    function: () async {
+                                      // await ApplicationsRepository()
+                                      //     .uploadFile(pickedFile!);
 
-                                  if (_formKey.currentState!.validate()) {
-                                    print("validatedd");
+                                      if (_formKey.currentState!.validate()) {
+                                        print("validatedd");
 
-                                    final application = ApplicationModel(
-                                      userId: "",
-                                      name: nameController.text,
-                                      email: emailController.text,
-                                      phone: phoneController.text,
-                                      currentlyEmployed: _selectedOption,
-                                      currentCompany: _selectedOption == "Yes"
-                                          ? companyController.text
-                                          : null,
-                                      position: _selectedOption == "Yes"
-                                          ? positionController.text
-                                          : null,
-                                      jobId: widget.jobId,
-                                    );
-                                    print(pickedFile!.path);
-                                    ref
-                                        .read(applyForJobProvider.notifier)
-                                        .sendApplication(
-                                            application, pickedFile!, context);
-                                  }
-                                })),
+                                        final application = ApplicationModel(
+                                          userId: "",
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          phone: phoneController.text,
+                                          currentlyEmployed: _selectedOption,
+                                          currentCompany:
+                                              _selectedOption == "Yes"
+                                                  ? companyController.text
+                                                  : null,
+                                          position: _selectedOption == "Yes"
+                                              ? positionController.text
+                                              : null,
+                                          jobId: widget.jobId,
+                                        );
+                                        print(pickedFile!.path);
+                                        ref
+                                            .read(applyForJobProvider.notifier)
+                                            .sendApplication(application,
+                                                pickedFile!, context);
+                                      }
+                                    })),
                           ]),
                     ),
                   ),

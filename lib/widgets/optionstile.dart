@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class ProfileOption extends StatelessWidget {
-  String option;
-  Icon icon;
+  final String option;
+  final Icon icon;
   ProfileOption({
     required this.option,
     required this.icon,

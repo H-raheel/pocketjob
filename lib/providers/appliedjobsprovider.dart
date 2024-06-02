@@ -15,9 +15,9 @@
 // }
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
-import 'package:pocketjob/providers/userRepoprovider.dart';
+import 'package:pocketjob/models/jobListing.dart';
+import 'package:pocketjob/providers/RepoProviders.dart';
 
 final appliedProvider = AutoDisposeStreamProvider<List<JobListing>>(((ref) {
   final userservice = ref.read(userRepositoryProvider);

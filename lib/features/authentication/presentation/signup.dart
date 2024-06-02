@@ -7,8 +7,10 @@ import 'package:pocketjob/features/authentication/presentation/signin.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/alert.dart';
-import 'package:pocketjob/widgets/buttons.dart';
-import 'package:pocketjob/widgets/field.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+
+import 'package:pocketjob/widgets/fields/field.dart';
+import 'package:pocketjob/widgets/fields/password_field.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({super.key});
@@ -113,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                     size: 10)
-                                : primaryButton("Sign Up", () async {
+                                : PrimaryButton(message:"Sign Up",function: () async {
                                     if (_formKey.currentState!.validate()) {
                                       ref
                                           .read(authControllerProvider.notifier)

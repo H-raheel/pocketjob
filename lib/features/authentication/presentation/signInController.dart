@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
 import 'package:pocketjob/features/authentication/presentation/signin.dart';
 import 'package:pocketjob/models/users.dart';
-import 'package:pocketjob/providers/handleSavedJobs.dart';
+import 'package:pocketjob/providers/RepoProviders.dart';
+import 'package:pocketjob/providers/savedJobsHandler.dart';
 import 'package:pocketjob/providers/userProvider.dart';
-import 'package:pocketjob/providers/userRepoprovider.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../providers/handleAppliedJobs.dart';
+import '../../../providers/appliedJobsHandler.dart';
 
 part 'signInController.g.dart';
 
@@ -30,7 +30,8 @@ class AuthController extends _$AuthController {
       state = AsyncValue.error("Could not sign in", StackTrace.current);
     } finally {
       if (state.hasError == false) {
-        state = const AsyncValue.data(null);
+        //  state = const AsyncValue.data(null);
+        state = const AsyncValue.loading();
         User? firebaseUser = authRepository.getUser();
         UserModel? exists = await userRepository.getUser(firebaseUser!.uid);
         if (exists == null) {
@@ -48,7 +49,7 @@ class AuthController extends _$AuthController {
           await ref.read(handleSavedJobsProvider.notifier).getjobs();
           ref.read(CurrentUserProvider.notifier).getuser(exists);
         }
-
+        state = const AsyncValue.data(null);
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const BottomNav()));
       }
@@ -67,6 +68,7 @@ class AuthController extends _$AuthController {
       state = AsyncValue.error("Could not sign in", StackTrace.current);
     } finally {
       if (state.hasError == false) {
+        state = const AsyncValue.loading();
         User? firebaseUser = authRepository.getUser();
         UserModel user = UserModel(
             userId: firebaseUser!.uid,
@@ -99,7 +101,8 @@ class AuthController extends _$AuthController {
       state = AsyncValue.error("Could not log in", StackTrace.current);
     } finally {
       if (state.hasError == false) {
-        state = const AsyncValue.data(null);
+        //   state = const AsyncValue.data(null);
+        state = const AsyncValue.loading();
         User? firebaseUser = authRepository.getUser();
         UserModel? user =
             await ref.read(userRepositoryProvider).getUser(firebaseUser!.uid);
@@ -109,6 +112,7 @@ class AuthController extends _$AuthController {
             context, MaterialPageRoute(builder: (context) => BottomNav()));
         await ref.read(jobApplicationsProvider.notifier).getjobs();
         await ref.read(handleSavedJobsProvider.notifier).getjobs();
+        state = const AsyncValue.data(null);
       }
     }
   }

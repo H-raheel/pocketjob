@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/users.dart';
 import 'package:pocketjob/providers/userProvider.dart';
-
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/utils/validators.dart';
 import 'package:pocketjob/widgets/back.dart';
-import 'package:pocketjob/widgets/buttons.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
 import 'package:pocketjob/widgets/done.dart';
-import 'package:pocketjob/widgets/field.dart';
+import 'package:pocketjob/widgets/fields/dropdown_field.dart';
+import 'package:pocketjob/widgets/fields/field.dart';
 
 class Editprofile extends ConsumerStatefulWidget {
   const Editprofile({super.key});
@@ -63,12 +63,11 @@ class _EditprofileState extends ConsumerState<Editprofile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         scrolledUnderElevation: 0,
         elevation: 0,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: Text("Personal Information", style: heading()),
+        centerTitle: true,
         leading: Back(
           context: context,
         ),
@@ -78,7 +77,7 @@ class _EditprofileState extends ConsumerState<Editprofile> {
           child: Form(
             key: _formKey,
             child: Padding(
-              padding: EdgeInsets.all(26),
+              padding: const EdgeInsets.all(26),
               child: Column(
                 children: [
                   Field(
@@ -86,18 +85,18 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                       label: "Name",
                       hintText: "Ayesha",
                       validator: (value) => validateString(value)),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Field(
                       defaultVal: false,
                       controller: _emailController,
                       label: "Email",
                       hintText: "",
                       validator: (value) => validateEmail(value)),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(children: [
-                    SizedBox(width: 2),
+                    const SizedBox(width: 2),
                     Expanded(
                       child: Field(
                           controller: _phoneController,
@@ -106,7 +105,7 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                           validator: (value) =>
                               validatePhoneNumberSyntax(value)),
                     ),
-                    SizedBox(width: 2),
+                    const SizedBox(width: 2),
                     Expanded(
                       child: SizedBox(
                         width: 20,
@@ -124,7 +123,7 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                       ),
                     ),
                   ]),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   CustomDropDownField(
                     list: _educationList,
                     label: "Highest Education Level",
@@ -136,13 +135,13 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                       });
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Field(
                       controller: _instituteController,
                       label: "Institute Attended",
                       hintText: "",
                       validator: (value) => noValidation(value)),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Field(
@@ -151,40 +150,45 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                     hintText: "",
                     validator: (value) => validateYear(value),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
                       width: MediaQuery.of(context).size.width / 2,
                       height: MediaQuery.of(context).size.height * 0.07,
-                      child: primaryButton("Done", () {
-                        if (_formKey.currentState!.validate()) {
-                          print(ref
-                              .read(CurrentUserProvider.notifier)
-                              .state
-                              ?.email);
-                          print(_nameController.text);
-                          ref.watch(CurrentUserProvider.notifier).updateState(
-                                _nameController.text,
-                                _phoneController.text,
-                                _selectedEducation,
-                                _instituteController.text,
-                                int.parse(_graduationController.text.trim()),
-                                _selectedGender,
-                              );
-                          print(ref
-                              .read(CurrentUserProvider.notifier)
-                              .state
-                              ?.name);
-                          showDialog(
-                              context: context,
-                              builder: (context) => Done(
-                                  message: "Profile Updated Successfully"));
-                        }
-                      }))
+                      child: PrimaryButton(
+                          message: "Done",
+                          function: () {
+                            if (_formKey.currentState!.validate()) {
+                              print(ref
+                                  .read(CurrentUserProvider.notifier)
+                                  .state
+                                  ?.email);
+                              print(_nameController.text);
+                              ref
+                                  .watch(CurrentUserProvider.notifier)
+                                  .updateState(
+                                    _nameController.text,
+                                    _phoneController.text,
+                                    _selectedEducation,
+                                    _instituteController.text,
+                                    int.parse(
+                                        _graduationController.text.trim()),
+                                    _selectedGender,
+                                  );
+                              print(ref
+                                  .read(CurrentUserProvider.notifier)
+                                  .state
+                                  ?.name);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => const Done(
+                                      message: "Profile Updated Successfully"));
+                            }
+                          }))
                 ],
               ),
             ),

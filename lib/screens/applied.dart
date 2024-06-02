@@ -6,7 +6,8 @@ import 'package:pocketjob/screens/job_info.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
-import 'package:pocketjob/widgets/buttons.dart';
+import 'package:pocketjob/widgets/button/primmarybutton.dart';
+
 import 'package:pocketjob/widgets/job_listing_card.dart';
 import 'package:pocketjob/widgets/progressLoader.dart';
 
@@ -55,7 +56,7 @@ class AppliedJobs extends ConsumerWidget {
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.07,
-                                      child: primaryButton("Find a Job", () {
+                                      child: PrimaryButton(message:"Find a Job", function:() {
                                         Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(

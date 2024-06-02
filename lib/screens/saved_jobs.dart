@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/displayJobs.dart';
-import 'package:pocketjob/providers/handleSavedJobs.dart';
+import 'package:pocketjob/providers/savedJobsHandler.dart';
 import 'package:pocketjob/screens/job_info.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/job_listing_card.dart';
+import 'package:pocketjob/widgets/progressLoader.dart';
 
 class SavedJobs extends ConsumerWidget {
   final List<JobListing> jobs = jobsList;
@@ -15,7 +16,7 @@ class SavedJobs extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savedJobs = ref.watch(handleSavedJobsProvider);
-    print(savedJobs.toString() + "saved jobs FROMSAVEDD");
+    // print(savedJobs.toString() + "saved jobs FROMSAVEDD");
     final dataNotifier = ref.watch(displayProvider);
     // final savedJobs = ref.watch(jobsSavedProvider);
     //  print(savedJobs.toString() + "saved jobs");
@@ -23,7 +24,9 @@ class SavedJobs extends ConsumerWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        leading: Back(context: context,),
+        leading: Back(
+          context: context,
+        ),
         centerTitle: true,
         title: Text(
           "Bookmarked",
@@ -34,7 +37,7 @@ class SavedJobs extends ConsumerWidget {
         child: Expanded(
           child: Container(
               color: Theme.of(context).colorScheme.secondary,
-              padding: EdgeInsets.only(top: 6, right: 6, left: 6),
+              padding: const EdgeInsets.only(top: 6, right: 6, left: 6),
               child: switch (dataNotifier) {
                 AsyncData(:final value) => value.isEmpty
                     ? Center(
@@ -45,10 +48,10 @@ class SavedJobs extends ConsumerWidget {
                               "No Saved Jobs",
                               style: heading(),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.bookmark_border,
                               size: 50,
                               color: Colors.grey,
@@ -95,10 +98,10 @@ class SavedJobs extends ConsumerWidget {
                                                 "No Jobs Saved",
                                                 style: heading(),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 20,
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.bookmark_border,
                                                 size: 50,
                                                 color: Colors.grey,
@@ -120,10 +123,10 @@ class SavedJobs extends ConsumerWidget {
                                     "No Jobs Saved",
                                     style: heading(),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.bookmark_border,
                                     size: 50,
                                     color: Colors.grey,
@@ -132,9 +135,18 @@ class SavedJobs extends ConsumerWidget {
                               ));
                       }),
                 AsyncError(:final error) => Center(
-                    child: Text("MAKE WIDGET FOR ERROR" + error.toString())),
-                AsyncLoading() => Center(child: CircularProgressIndicator()),
-                _ => Center(child: Text("default")),
+                      child: Column(
+                    children: [
+                      const Icon(
+                        Icons.error_outline_rounded,
+                        size: 50,
+                        color: Colors.red,
+                      ),
+                      Text(error.toString()),
+                    ],
+                  )),
+                AsyncLoading() => const WaitingForProgressLoader(),
+                _ => const Center(child: Text("default")),
               }
 
               // StreamBuilder<List<JobListing>>(
