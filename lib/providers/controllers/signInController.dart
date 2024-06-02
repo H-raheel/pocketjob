@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
-import 'package:pocketjob/features/authentication/presentation/signin.dart';
+import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/screens/signin.dart';
 import 'package:pocketjob/models/users.dart';
 import 'package:pocketjob/providers/RepoProviders.dart';
 import 'package:pocketjob/providers/savedJobsHandler.dart';
@@ -9,7 +9,7 @@ import 'package:pocketjob/providers/userProvider.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../providers/appliedJobsHandler.dart';
+import '../appliedJobsHandler.dart';
 
 part 'signInController.g.dart';
 

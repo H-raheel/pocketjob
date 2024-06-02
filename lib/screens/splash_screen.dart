@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pocketjob/features/authentication/presentation/signin.dart';
+import 'package:pocketjob/screens/signin.dart';
 import 'package:pocketjob/utils/texts.dart';
 
 class SplashScreen extends StatefulWidget {

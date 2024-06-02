@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/features/authentication/presentation/signInController.dart';
+import 'package:pocketjob/providers/controllers/signInController.dart';
 import 'package:pocketjob/screens/updateProfile.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/alert.dart';

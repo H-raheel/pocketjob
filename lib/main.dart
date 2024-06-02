@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
+import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/firebase_options.dart';
 import 'package:pocketjob/screens/splash_screen.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';

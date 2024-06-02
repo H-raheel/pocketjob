@@ -15,7 +15,7 @@
 // }
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/features/authentication/presentation/authProvider.dart';
+import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/models/jobListing.dart';
 import 'package:pocketjob/providers/RepoProviders.dart';
 
