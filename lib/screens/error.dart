@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pocketjob/utils/texts.dart';
+import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/button/primmarybutton.dart';
-
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key});
@@ -41,9 +41,14 @@ class ErrorScreen extends StatelessWidget {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.07,
-                    child: PrimaryButton(message:"Go Back",function: () {
-                      Navigator.of(context).pop(context);
-                    })),
+                    child: PrimaryButton(
+                        message: "Go to Home",
+                        function: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BottomNav()));
+                        })),
               ]),
         ),
       ),

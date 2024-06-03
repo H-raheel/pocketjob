@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pocketjob/providers/controllers/signInController.dart';
+import 'package:pocketjob/screens/addskills.dart';
 import 'package:pocketjob/screens/updateProfile.dart';
 import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/alert.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/button/primmarybutton.dart';
 import 'package:pocketjob/widgets/button/secondarybutton.dart';
-
 import 'package:pocketjob/widgets/optionstile.dart';
 import 'package:pocketjob/widgets/progressLoader.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -74,7 +74,7 @@ class ProfileScreen extends ConsumerWidget {
                               children: [
                                 Text("Are you sure you want to log out?",
                                     style: body3()),
-                               const SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
@@ -85,8 +85,8 @@ class ProfileScreen extends ConsumerWidget {
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
                                       child: PrimaryButton(
-                                        message:  "Log Out",
-                                        function:  () => ref
+                                          message: "Log Out",
+                                          function: () => ref
                                               .read(authControllerProvider
                                                   .notifier)
                                               .signOut(context)),
@@ -94,8 +94,10 @@ class ProfileScreen extends ConsumerWidget {
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
-                                      child: SecondaryButton(message:"Cancel",
-                                         function: () => Navigator.pop(context)),
+                                      child: SecondaryButton(
+                                          message: "Cancel",
+                                          function: () =>
+                                              Navigator.pop(context)),
                                     )
                                   ],
                                 )
@@ -131,9 +133,17 @@ class ProfileScreen extends ConsumerWidget {
                         context,
                         MaterialPageRoute(builder: (context) => Editprofile()),
                       ),
-                      child: ProfileOption(
-                        option: "Add Skills",
-                        icon: Icon(Icons.pie_chart_rounded),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddSkillsScreen()));
+                        },
+                        child: ProfileOption(
+                          option: "Add Skills",
+                          icon: Icon(Icons.pie_chart_rounded),
+                        ),
                       ),
                     ),
                     const SizedBox(

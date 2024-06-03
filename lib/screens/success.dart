@@ -4,7 +4,6 @@ import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/button/primmarybutton.dart';
 
-
 class Success extends StatelessWidget {
   const Success({super.key});
 
@@ -16,7 +15,6 @@ class Success extends StatelessWidget {
         body: SafeArea(
             child: Stack(
           children: [
-           
             Positioned(
                 bottom: 0,
                 child: Container(
@@ -36,12 +34,14 @@ class Success extends StatelessWidget {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.07,
-                          child: PrimaryButton(message:"Go to Applications",function: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AppliedJobs()));
-                          }),
+                          child: PrimaryButton(
+                              message: "Go to Applications",
+                              function: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AppliedJobs()));
+                              }),
                         ),
                         SizedBox(
                           height: 20,
@@ -49,23 +49,22 @@ class Success extends StatelessWidget {
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height * 0.07,
-                          child: PrimaryButton(message:"Go to Home", function:() {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomNav()));
-                          }),
+                          child: PrimaryButton(
+                              message: "Go to Home",
+                              function: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BottomNav()));
+                              }),
                         ),
                       ]),
                 )),
-
             Positioned(
                 left: 0,
                 right: 0,
-                //  top: MediaQuery.of(context).size.height * 0.3,
                 bottom: MediaQuery.of(context).size.height * 0.4,
                 child: Column(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.primary,

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/providers/authProvider.dart';
+import 'package:pocketjob/providers/authRepoProvider.dart';
 import 'package:pocketjob/providers/RepoProviders.dart';
-
 
 final jobApplicationsProvider =
     StateNotifierProvider<JobApplications, List<String>>((ref) {
@@ -14,19 +13,19 @@ class JobApplications extends StateNotifier<List<String>> {
   JobApplications(this.ref) : super([]);
 
   Future<void> getjobs() async {
-    final userservice = ref.read(userRepositoryProvider);
+    final userRepository = ref.read(userRepositoryProvider);
     final authRepository = ref.read(authRepositoryProvider);
     final userId = authRepository.getUserId();
 
     if (userId != null) {
-      List<String> jobs = await userservice.getAppliedJobs(userId);
+      List<String> jobs = await userRepository.getAppliedJobs(userId);
       state = jobs;
-      print("state updated: $state");
+      
     }
   }
 
   bool isIdPresent(String id) {
-    print("Checking ID $id in state: $state");
+   
     return state.contains(id);
   }
 

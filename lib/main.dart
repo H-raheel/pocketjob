@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/firebase_options.dart';
+import 'package:pocketjob/models/users.dart';
+import 'package:pocketjob/providers/userProvider.dart';
 import 'package:pocketjob/screens/splash_screen.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 
@@ -18,10 +18,14 @@ void main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
+  @override
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    User? user = ref.read(authRepositoryProvider).getUser();
+    UserModel? user = ref.read(CurrentUserProvider);
+    print("maaaaain");
+    print(user);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Pocket Job',

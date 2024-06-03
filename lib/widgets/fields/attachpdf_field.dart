@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -49,6 +47,7 @@ class _AttachPDFFieldState extends State<AttachPDFField> {
                     color: Color.fromARGB(69, 212, 210, 210),
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: selectedFile == null
                       ? [
                           IconButton(

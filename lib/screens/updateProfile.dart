@@ -163,13 +163,8 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                           message: "Done",
                           function: () {
                             if (_formKey.currentState!.validate()) {
-                              print(ref
-                                  .read(CurrentUserProvider.notifier)
-                                  .state
-                                  ?.email);
-                              print(_nameController.text);
                               ref
-                                  .watch(CurrentUserProvider.notifier)
+                                  .read(CurrentUserProvider.notifier)
                                   .updateState(
                                     _nameController.text,
                                     _phoneController.text,
@@ -179,10 +174,7 @@ class _EditprofileState extends ConsumerState<Editprofile> {
                                         _graduationController.text.trim()),
                                     _selectedGender,
                                   );
-                              print(ref
-                                  .read(CurrentUserProvider.notifier)
-                                  .state
-                                  ?.name);
+
                               showDialog(
                                   context: context,
                                   builder: (context) => const Done(

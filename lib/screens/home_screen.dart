@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dataNotifier = ref.watch(displayProvider);
     final searchControllerProvider = ref.watch(searchProvider);
-    // final userData = ref.read(CurrentUserProvider);
+    // final userData = ref.watch(CurrentUserProvider);
 
     return Scaffold(
         body: SafeArea(
@@ -98,8 +98,6 @@ class HomeScreen extends ConsumerWidget {
                                       )));
                                 } else if (current.title.toLowerCase().contains(
                                     searchControllerProvider.toLowerCase())) {
-                                  print("printintntnt");
-                                  print(searchControllerProvider);
                                   return GestureDetector(
                                       onTap: () {
                                         Navigator.push(
@@ -120,16 +118,17 @@ class HomeScreen extends ConsumerWidget {
                                 }
                               });
                     }),
-              AsyncError(:final error) =>
-                Center(child: Text(error.toString() + "error.try again ")),
+              AsyncError(:final error) => Center(
+                  child: const Icon(Icons.error),
+                ),
               AsyncLoading() => (const WaitingForProgressLoader()),
-              _ => Center(child: Text("default")),
+              _ => const Center(child: Text("default")),
             }),
         Container(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30))),
           height: MediaQuery.of(context).size.height * 0.2,
@@ -139,20 +138,21 @@ class HomeScreen extends ConsumerWidget {
             children: [
               Text(
                 "Welcome, ${ref.read(CurrentUserProvider)?.name ?? 'User'}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.w600),
               ),
-              Spacer(),
+              const Spacer(),
               TextField(
                   onChanged: (value) => update(ref, value),
 
                   ///   controller: searchController,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(12),
+                    contentPadding: const EdgeInsets.all(12),
                     hintText: "Search",
-                    hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+                    hintStyle:
+                        const TextStyle(fontSize: 17, color: Colors.grey),
                     filled: true,
                     prefixIcon: Icon(
                       Icons.search,
@@ -160,7 +160,7 @@ class HomeScreen extends ConsumerWidget {
                       size: 30,
                     ),
                     fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),

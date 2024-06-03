@@ -21,15 +21,13 @@ class JobInfoScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final app = ref.watch(jobApplicationsProvider.notifier).state;
-    // print(app.toString() + "app");
+  
     bool applied =
         ref.read(jobApplicationsProvider.notifier).isIdPresent(jobDetails.id!);
 
     return Scaffold(
         appBar: AppBar(
-          //  scrolledUnderElevation: 0,
-          //  elevation: 0,
+         
           backgroundColor: Theme.of(context).colorScheme.secondary,
           leading: Back(
             context: context,
@@ -43,7 +41,7 @@ class JobInfoScreen extends ConsumerWidget {
               width: double.infinity,
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                  // borderRadius: BorderRadius.circular(20),
+                 
                   color: Theme.of(context).colorScheme.secondary),
             ),
             Positioned(
@@ -164,7 +162,7 @@ class JobInfoScreen extends ConsumerWidget {
             Positioned(
               bottom: 0,
               child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding:const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       border: Border.all(
                           color: const Color.fromARGB(255, 212, 212, 212)),

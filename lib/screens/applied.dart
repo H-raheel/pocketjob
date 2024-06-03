@@ -7,12 +7,11 @@ import 'package:pocketjob/utils/texts.dart';
 import 'package:pocketjob/widgets/back.dart';
 import 'package:pocketjob/widgets/bottom_navigation.dart';
 import 'package:pocketjob/widgets/button/primmarybutton.dart';
-
 import 'package:pocketjob/widgets/job_listing_card.dart';
 import 'package:pocketjob/widgets/progressLoader.dart';
 
 class AppliedJobs extends ConsumerWidget {
-  AppliedJobs({super.key});
+  const AppliedJobs({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,13 +55,15 @@ class AppliedJobs extends ConsumerWidget {
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.07,
-                                      child: PrimaryButton(message:"Find a Job", function:() {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BottomNav()));
-                                      })),
+                                      child: PrimaryButton(
+                                          message: "Find a Job",
+                                          function: () {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BottomNav()));
+                                          })),
                                 ],
                               ),
                             )
@@ -91,7 +92,7 @@ class AppliedJobs extends ConsumerWidget {
                               ),
                               itemCount: data.length,
                             )),
-                      error: (error, StackTrace) => Text(error.toString()),
+                      error: (error, StackTrace) => Center(child:Icon(Icons.error),),
                       loading: () => const WaitingForProgressLoader())),
             )
           ],

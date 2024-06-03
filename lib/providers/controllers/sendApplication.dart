@@ -1,13 +1,11 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pocketjob/providers/authProvider.dart';
 import 'package:pocketjob/models/applications.dart';
-import 'package:pocketjob/providers/appliedJobsHandler.dart';
 import 'package:pocketjob/providers/RepoProviders.dart';
+import 'package:pocketjob/providers/appliedJobsHandler.dart';
+import 'package:pocketjob/providers/authRepoProvider.dart';
 import 'package:pocketjob/screens/success.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../applicationRepoprovider.dart';
 
 part 'sendApplication.g.dart';
 
@@ -24,7 +22,6 @@ class ApplyForJob extends _$ApplyForJob {
     BuildContext context,
   ) async {
     try {
-      print("inheree");
       state = const AsyncValue.loading();
       final user = ref.read(authRepositoryProvider).getUser();
 
@@ -40,11 +37,10 @@ class ApplyForJob extends _$ApplyForJob {
         status: application.status,
         pdfUrl: application.pdfUrl,
       );
-      final applicationservice = ref.read(applicationserviceProvider);
-      final userservice = ref.read(userRepositoryProvider);
-
+      final applicationservice = ref.read(applicationRepositoryProvider);
+      final userRepository = ref.read(userRepositoryProvider);
       await applicationservice.saveApplication(applicationWithUserId, file);
-      await userservice.saveAppliedJobToUser(user.uid, application.jobId);
+      await userRepository.saveAppliedJobToUser(user.uid, application.jobId);
       ref.read(jobApplicationsProvider.notifier).add(application.jobId);
       ref.read(jobApplicationsProvider.notifier).getjobs();
     } catch (e) {
