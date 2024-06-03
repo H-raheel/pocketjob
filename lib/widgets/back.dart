@@ -6,8 +6,8 @@ class Back extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Transform.scale(
-      scale: 0.8,
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
