@@ -118,8 +118,8 @@ class HomeScreen extends ConsumerWidget {
                                 }
                               });
                     }),
-              AsyncError(:final error) => Center(
-                  child: const Icon(Icons.error),
+              AsyncError() => const Center(
+                  child: Icon(Icons.error),
                 ),
               AsyncLoading() => (const WaitingForProgressLoader()),
               _ => const Center(child: Text("default")),

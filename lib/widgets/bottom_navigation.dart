@@ -37,8 +37,6 @@ class _BottomNavState extends State<BottomNav> {
           selectedItemColor: Theme.of(context).colorScheme.primary,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          //currentIndex: 1,
-          // iconSize: 30,
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded), label: "Home"),

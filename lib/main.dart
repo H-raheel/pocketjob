@@ -24,8 +24,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserModel? user = ref.read(CurrentUserProvider);
-    print("maaaaain");
-    print(user);
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Pocket Job',
