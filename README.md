@@ -12,7 +12,7 @@
     </ul>
   </li>
   <li><a href="#usage">Usage</a></li>
-
+<li><a href ="demo">Demo</a></li>
 </ul>
 <hr>
 <h2 id="features">Features</h2>
@@ -73,3 +73,9 @@ flutter run
   <li><strong>Apply for Jobs</strong>: Click on the apply button and follow the prompts to submit your application.</li>
   <li><strong>Upload Resume</strong>: Click on the upload button and follow the instructions to upload your resume, making it available for quick application to multiple job listings.</li>
 </ul>
+<h2 id="demo">Demo</h2>
+
+<iframe width="600" height="340" src="https://www.youtube.com/embed/9XzqqfgTsHg" frameborder="0" allowfullscreen></iframe>
+
+
+
